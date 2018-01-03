@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>使用私有协议控制打开浏览器 | Top Say</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景有这样一个项目：通过单点登录集成WEB类应用，通过统一入口方式实现应用的集中访问，效果见图  但因存在多开发厂商、集成项目建设时间差异等原因，出现浏览器差异化需求，如：行文办公，因使用插件需通过ActivitiX进行加载，必须使用IE；新上线的应用，因使用的框架比较新，对低版本IE不兼容，而需要使用Chrome或火狐这样的现代浏览器，林林总总。 虽说只有考虑不到的设计没有碰不到的需求，客户说">
+<meta name="keywords" content="web编程 shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用私有协议控制打开浏览器">
+<meta property="og:url" content="http://localhost/2018/01/03/使用私有协议控制打开浏览器/index.html">
+<meta property="og:site_name" content="Top Say">
+<meta property="og:description" content="背景有这样一个项目：通过单点登录集成WEB类应用，通过统一入口方式实现应用的集中访问，效果见图  但因存在多开发厂商、集成项目建设时间差异等原因，出现浏览器差异化需求，如：行文办公，因使用插件需通过ActivitiX进行加载，必须使用IE；新上线的应用，因使用的框架比较新，对低版本IE不兼容，而需要使用Chrome或火狐这样的现代浏览器，林林总总。 虽说只有考虑不到的设计没有碰不到的需求，客户说">
+<meta property="og:locale" content="zh_cn">
+<meta property="og:image" content="http://localhost/2018/01/03/使用私有协议控制打开浏览器/desktop.png">
+<meta property="og:image" content="http://localhost/2018/01/03/使用私有协议控制打开浏览器/pop_window.png">
+<meta property="og:updated_time" content="2018-01-03T07:16:46.129Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用私有协议控制打开浏览器">
+<meta name="twitter:description" content="背景有这样一个项目：通过单点登录集成WEB类应用，通过统一入口方式实现应用的集中访问，效果见图  但因存在多开发厂商、集成项目建设时间差异等原因，出现浏览器差异化需求，如：行文办公，因使用插件需通过ActivitiX进行加载，必须使用IE；新上线的应用，因使用的框架比较新，对低版本IE不兼容，而需要使用Chrome或火狐这样的现代浏览器，林林总总。 虽说只有考虑不到的设计没有碰不到的需求，客户说">
+<meta name="twitter:image" content="http://localhost/2018/01/03/使用私有协议控制打开浏览器/desktop.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Top Say</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://localhost"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用私有协议控制打开浏览器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/03/使用私有协议控制打开浏览器/" class="article-date">
+  <time datetime="2018-01-03T05:37:14.000Z" itemprop="datePublished">2018-01-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用私有协议控制打开浏览器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>有这样一个项目：通过单点登录集成WEB类应用，通过统一入口方式实现应用的集中访问，效果见图</p>
+<p><img src="/2018/01/03/使用私有协议控制打开浏览器/desktop.png" alt="desktop"></p>
+<p>但因存在多开发厂商、集成项目建设时间差异等原因，出现浏览器差异化需求，如：行文办公，因使用插件需通过ActivitiX进行加载，必须使用IE；新上线的应用，因使用的框架比较新，对低版本IE不兼容，而需要使用Chrome或火狐这样的现代浏览器，林林总总。</p>
+<p>虽说只有考虑不到的设计没有碰不到的需求，客户说要支持，只能上啊，乙放得有乙方的承担（囧）。</p>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>这种需要判断主机环境（只考虑面向<code>windows</code>用户，为什么？没有人在<code>Linux</code>或者<code>MAC</code>上用<code>ActivitiX</code>插件啊）是否安装浏览器还能调启浏览器的，第一想法肯定是浏览器插件，但每种浏览器都得开发插件，想想都快崩溃，有没有其他办法呢？</p>
+<p>某度完全不知道你搜索的是什么，还得靠<code>Google</code>了 （你上不了？确定你是技术人员？）</p>
+<p>大概两种方法：</p>
+<ol>
+<li>使用JS控制打开某浏览器，再进行跳转（感觉心里没底，还得设置浏览器安全等级一堆，试了下放弃）</li>
+<li>使用协议扩展，定制注册表，控制打开浏览器</li>
+</ol>
+<p>说得有点多^_^ 还是show代码吧</p>
+<p>定制注册表，保存为<code>.reg</code>后缀的文件并执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2]</span><br><span class="line"><span class="string">"URL Protocol"</span>=<span class="string">"\"</span>\<span class="string">""</span></span><br><span class="line">@=<span class="string">"\"</span>URL:chrome2 Protocol\<span class="string">""</span></span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\DefaultIcon]</span><br><span class="line">@=<span class="string">"\"</span>chrome.exe,<span class="number">1</span>\<span class="string">""</span></span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\shell]</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\shell\open]</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\shell\open\command]</span><br><span class="line">@=<span class="string">"cmd /k set myvar=%1 &amp; call set myvar=%%myvar:chrome2:=%% &amp; call start chrome  %%myvar%% &amp; exit /B"</span></span><br></pre></td></tr></table></figure>
+<p>大致就是做个钩子，在使用专用协议 <code>chrome2</code>时 使用chrome浏览器打开，使用<code>ie</code>协议的链接使用IE打开，类似代码就不贴了</p>
+<p>测试代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"ie:http://www.baidu.com"</span>&gt;</span>用IE打开<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"chrome2:http://www.baidu.com/"</span>&gt;</span>用chrome打开<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>点击用IE打开（弹出框有点丑）</p>
+<p><img src="/2018/01/03/使用私有协议控制打开浏览器/pop_window.png" alt="pop_window"></p>
+<h4 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h4><p>添加判断客户端是否已安装指定浏览器，让丑陋的弹窗口不丑陋</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://localhost/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjbyv2gip0001yguvy4p2ue59" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web编程-shell/">web编程 shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/03/Java-Integer的默认缓存特性/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java Integer的默认缓存特性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MySQL函数小记GROUP_CONCAT</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程 shell</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程 shell</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/03/Java-Integer的默认缓存特性/">Java Integer的默认缓存特性</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/03/使用私有协议控制打开浏览器/">使用私有协议控制打开浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/">MySQL函数小记GROUP_CONCAT</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 何建华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

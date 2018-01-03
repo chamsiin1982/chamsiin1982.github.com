@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>MySQL函数小记GROUP_CONCAT | Top Say</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MySQL函数小记 GROUP_CONCAT在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DE">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL函数小记GROUP_CONCAT">
+<meta property="og:url" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/index.html">
+<meta property="og:site_name" content="Top Say">
+<meta property="og:description" content="MySQL函数小记 GROUP_CONCAT在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DE">
+<meta property="og:locale" content="zh_cn">
+<meta property="og:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
+<meta property="og:updated_time" content="2018-01-03T05:34:45.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL函数小记GROUP_CONCAT">
+<meta name="twitter:description" content="MySQL函数小记 GROUP_CONCAT在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DE">
+<meta name="twitter:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Top Say</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://localhost"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MySQL函数小记GROUP_CONCAT" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" class="article-date">
+  <time datetime="2018-01-02T15:56:52.000Z" itemprop="datePublished">2018-01-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL函数小记GROUP_CONCAT
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL函数小记-GROUP-CONCAT"><a href="#MySQL函数小记-GROUP-CONCAT" class="headerlink" title="MySQL函数小记 GROUP_CONCAT"></a>MySQL函数小记 GROUP_CONCAT</h1><p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
+<h2 id="或者修改配置文件"><a href="#或者修改配置文件" class="headerlink" title="或者修改配置文件"></a>或者修改配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>表b_department结构</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th style="text-align:left">字段类型</th>
+<th style="text-align:center">为主键</th>
+<th style="text-align:center">为外键</th>
+<th style="text-align:center">可为空</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>department_id</td>
+<td style="text-align:left">int(11)</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td>department_name</td>
+<td style="text-align:left">varchar(50)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td>p_department</td>
+<td style="text-align:left">int(11)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>SQL语句</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.department_id,a.department_name,a.p_department, </span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_id) <span class="keyword">as</span> child_ids,</span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_name) <span class="keyword">as</span> child_names</span><br><span class="line"><span class="keyword">from</span> sys_department a</span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">join</span> sys_department b <span class="keyword">on</span> a.department_id=b.p_department</span><br><span class="line">  <span class="keyword">where</span> a.p_department=<span class="number">1</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a.department_id,a.department_name,a.p_department</span><br></pre></td></tr></table></figure>
+<p>执行结果 <img src="/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png" alt="image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjbyv2gip0003yguvcvgnxelm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/03/使用私有协议控制打开浏览器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用私有协议控制打开浏览器
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程 shell</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程 shell</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/03/Java-Integer的默认缓存特性/">Java Integer的默认缓存特性</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/03/使用私有协议控制打开浏览器/">使用私有协议控制打开浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/">MySQL函数小记GROUP_CONCAT</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 何建华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
