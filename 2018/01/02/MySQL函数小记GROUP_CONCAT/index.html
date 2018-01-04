@@ -7,19 +7,19 @@
   
   <title>MySQL函数小记GROUP_CONCAT | Top Say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL函数小记 GROUP_CONCAT在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DE">
+  <meta name="description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL函数小记GROUP_CONCAT">
 <meta property="og:url" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/index.html">
 <meta property="og:site_name" content="Top Say">
-<meta property="og:description" content="MySQL函数小记 GROUP_CONCAT在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DE">
+<meta property="og:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
-<meta property="og:updated_time" content="2018-01-03T05:34:45.959Z">
+<meta property="og:updated_time" content="2018-01-04T13:30:38.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL函数小记GROUP_CONCAT">
-<meta name="twitter:description" content="MySQL函数小记 GROUP_CONCAT在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DE">
+<meta name="twitter:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
 <meta name="twitter:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
   
     <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
@@ -89,7 +89,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="MySQL函数小记-GROUP-CONCAT"><a href="#MySQL函数小记-GROUP-CONCAT" class="headerlink" title="MySQL函数小记 GROUP_CONCAT"></a>MySQL函数小记 GROUP_CONCAT</h1><p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
+        <hr>
+<p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
@@ -140,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc06oagj0003r8uvacuh805s" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc0j6c7x0003ewuvbyv4ny0i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>

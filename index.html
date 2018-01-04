@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjc06oagg0001r8uv3ygvawus" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjc0j6c7w0001ewuv3b7kty9r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关闭/">关闭</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li></ul>
@@ -138,7 +138,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png" alt="服务访问时序示意图"></p>
+        <hr>
+<p><img src="/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png" alt="服务访问时序示意图"></p>
 <h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在<code>应用服务器</code>配置<code>单点服务</code>信息、<code>应用服务</code>信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 <strong>20008</strong>，应用服务器地址 ***.94.78.93 端口<strong>10004</strong></p>
 <ol>
 <li>应用服务器 <strong>内网地址</strong>    192.168.5.109 服务部署 Tomcat 使用端口 8080<br><strong>映射公网</strong>      <em>*</em>.94.78.93  端口  10004</li>
@@ -169,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjc06oagk0004r8uvu3z0aphi" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjc0j6c7x0004ewuvx3dg1jgz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/认证/">认证</a></li></ul>
@@ -203,7 +204,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h4><p>项目里有发现“神奇”的代码，先不考虑代码逻辑以及实现方法是否合理，原来代码实现大致是这样：</p>
+        <hr>
+<h4 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h4><p>项目里有发现“神奇”的代码，先不考虑代码逻辑以及实现方法是否合理，原来代码实现大致是这样：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## department 对象</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Department</span></span>&#123;</span><br><span class="line">   <span class="keyword">private</span>  Integer departmentId;</span><br><span class="line">   <span class="keyword">private</span>  String  departmentName;</span><br><span class="line">   <span class="keyword">private</span> Integer  pDepartmentId;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">private</span> List&lt;user&gt; departmentMember;</span><br><span class="line">   ## 省略get\set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## user 对象</span><br><span class="line">publci <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    ##所属部门编号</span><br><span class="line">    <span class="keyword">private</span> Integer departmentId;</span><br><span class="line">    </span><br><span class="line">    ## 省略get/set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">## 组织部门人员信息</span><br><span class="line"></span><br><span class="line">## 获取部门信息</span><br><span class="line">List&lt;Department&gt; departments= departmentService.getAllDepartments();</span><br><span class="line"></span><br><span class="line">## 获取人员信息</span><br><span class="line">List&lt;User&gt; users=userService.getAllUsers();</span><br><span class="line"></span><br><span class="line">## 迭代，拼接数据</span><br><span class="line"><span class="keyword">for</span>(Department dep:departments)&#123;</span><br><span class="line">    <span class="keyword">for</span>(User user:users)&#123;</span><br><span class="line">        <span class="comment">//坑点</span></span><br><span class="line">        <span class="keyword">if</span>(user.getDepartmentId() == dep.getDepartmentId())&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == dep.getDepartmentMember() )&#123;</span><br><span class="line">                dep.setDepartmentMember(<span class="keyword">new</span> ArrayList&lt;User&gt;());</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dep.getDepartmentMember().add(user);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -221,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjc06oafy0000r8uv7f0bwpkn" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjc0j6c7e0000ewuv305bvyzo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -280,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjc06oagl0005r8uvky2q2jm5" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjc0j6c8c0005ewuvdh29b9be" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li></ul>
@@ -314,7 +316,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="MySQL函数小记-GROUP-CONCAT"><a href="#MySQL函数小记-GROUP-CONCAT" class="headerlink" title="MySQL函数小记 GROUP_CONCAT"></a>MySQL函数小记 GROUP_CONCAT</h1><p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
+        <hr>
+<p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
@@ -365,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc06oagj0003r8uvacuh805s" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc0j6c7x0003ewuvbyv4ny0i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
