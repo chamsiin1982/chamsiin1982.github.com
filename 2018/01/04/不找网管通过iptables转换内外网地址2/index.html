@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>不找网管通过iptables转换内外网地址 | Top Say</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明：这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在应用服务器配置单点服务信息、应用服务信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 20008，应用服务器地址 ***.94.78.93 端口10004  应用服务器 内网地址    192.168.5.109 服务部署 Tomcat 使用端口 8080映射公网">
+<meta name="keywords" content="iptables,认证,ip地址改写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不找网管通过iptables转换内外网地址">
+<meta property="og:url" content="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/index.html">
+<meta property="og:site_name" content="Top Say">
+<meta property="og:description" content="说明：这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在应用服务器配置单点服务信息、应用服务信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 20008，应用服务器地址 ***.94.78.93 端口10004  应用服务器 内网地址    192.168.5.109 服务部署 Tomcat 使用端口 8080映射公网">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png">
+<meta property="og:updated_time" content="2018-01-04T04:32:07.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不找网管通过iptables转换内外网地址">
+<meta name="twitter:description" content="说明：这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在应用服务器配置单点服务信息、应用服务信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 20008，应用服务器地址 ***.94.78.93 端口10004  应用服务器 内网地址    192.168.5.109 服务部署 Tomcat 使用端口 8080映射公网">
+<meta name="twitter:image" content="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Top Say</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://localhost"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-不找网管通过iptables转换内外网地址2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/04/不找网管通过iptables转换内外网地址2/" class="article-date">
+  <time datetime="2018-01-04T04:28:25.000Z" itemprop="datePublished">2018-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      不找网管通过iptables转换内外网地址
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png" alt="服务访问时序示意图"></p>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在<code>应用服务器</code>配置<code>单点服务</code>信息、<code>应用服务</code>信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 <strong>20008</strong>，应用服务器地址 ***.94.78.93 端口<strong>10004</strong></p>
+<ol>
+<li>应用服务器 <strong>内网地址</strong>    192.168.5.109 服务部署 Tomcat 使用端口 8080<br><strong>映射公网</strong>      <em>*</em>.94.78.93  端口  10004</li>
+<li>单点认证服务器 <strong>内网地址</strong>  192.168.5.207 端口 8080<br>映射至公网    ***.94.78.76  端口  20008 </li>
+</ol>
+<h4 id="重定向URL"><a href="#重定向URL" class="headerlink" title="重定向URL"></a>重定向URL</h4><p>通过公网 访问服务：<code>http://***.94.78.93:10004/vocs</code> 会被单点认证服务器拦截，会拼接路径： <code>http:// ***.94.78.93:20008/xxxxx?app=vocs&amp;url=http:// ***.94.78.93:10004/vocs</code><br>（路径只为表现功能，不代表实际路径）</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>到目前，一切看起来都很正常，也符合单点认证服务集成配置要求，但现实总会出现些奇怪的状况，比如：<strong>***.94.78.93</strong> , <strong>***.94.78.76</strong>  都是虚地址，更要命的是在 <strong>192.168.5.109</strong> 上居然<strong>ping</strong>不通***.94.78.76 ！好在能ping通 <strong>192.168.5.207</strong> 这个局域网地址</p>
+<h4 id="如何解决？"><a href="#如何解决？" class="headerlink" title="如何解决？"></a>如何解决？</h4><p>如果单点认证服务能够把认证配置和跳转配置分开，可配置成不同IP就能解决问题，或者网管能够帮调整下网络，让<strong>192.168.5.109</strong>能够访问到单点认证的公网IP也能解决问题. </p>
+<p>理想很丰满，现实却很骨干，协调后，得到的回馈是：单点认证服务暂时不支持分开配置，网管那边下班了（周五），怎么办？周一早上要给领导演示啊</p>
+<h4 id="第三条路"><a href="#第三条路" class="headerlink" title="第三条路"></a>第三条路</h4><p>抖了半天包袱，终于到正题了 m_m，默念10遍“<strong>ping公网不通，内网通</strong>”！</p>
+<ol>
+<li><p>要是使用的是域名就好了，配置下host就能蒙混过关，但哪来域名啊，到目前为止也没看过给什么应用分过域名，哪怕是三级域名！只能说这叫想得美……</p>
+</li>
+<li><p>能不能控制下路由或把访问的公网IP，改成内网IP！改IP，代理行吗？还得搞实验环境，代理后还得改写目标地址，改写目标地址，好像有那么点对的味道！</p>
+</li>
+</ol>
+<h4 id="定个小目标，就来改写目标地址试试"><a href="#定个小目标，就来改写目标地址试试" class="headerlink" title="定个小目标，就来改写目标地址试试"></a>定个小目标，就来改写目标地址试试</h4><p>以前用iptables实现过访问转发，iptables好像有改写目标地址，一通搜索，大部分都是说的是转发的,剩下的也描述的好晦涩，那些为了流量而复制黏贴内容的广告网站，你们有操守嘛！！！你们这些搬运工，把代码格式弄得那么差，也不标注源地址，更可恨的是某些搜索引擎，居然还让他们排前面，是不是自己不敢挂的广告就让他们来挂 ！！！</p>
+<p>只能恶补下基础，找iptables的完整教程，好在 <a href="http://www.imooc.com/learn/389" target="_blank" rel="noopener">慕课网</a>上有个不错的教程(实际因为前面的项目使用iptables配置转发的时候看过一遍，但是脑子里面一点印象都没有了，难道真的是老了嘛，记忆力差成这样了-_-! ),整个教程又搂了一遍,然后又开始试错n小时就过去了……</p>
+<h4 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h4><p>使用iptables的net地址转化，把 5.109对 <em>**.94.78.76的访问转换成 5.207的访问，回来的IP地址再改为 \</em>**.94.78.76</p>
+<p>最初是这样的：</p>
+<p>出去：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 20009 -d ***.94.78.76 -j DNAT --to 192.168.5.207:8080</span><br></pre></td></tr></table></figure>
+<p>回来：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -d 192.168.5.207 -p tcp --dport 8080 -j SNAT --to ***.94.78.76:20009</span><br></pre></td></tr></table></figure></p>
+<p>最后是这样的：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A OUTPUT  -p tcp --dport 20009 -d ***.94.78.76 -j DNAT --to 192.168.5.207:8080</span><br></pre></td></tr></table></figure></p>
+<p>表面上是被路由坑了，实际还是对iptables没搞清楚，虽然理论上效果是一致的</p>
+<h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><p>写这篇分享主要为<strong>iptables可用来改写目标地址</strong>，另外过程中也请网络运维的工程师帮看写出来的语句，请人帮忙一定要描述清问题，最好是请别人帮看代码写的对不对，而不是请人帮你写，因为不在一个频道上的对话，需要多大的面子啊</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjc000jl60004q8uvwt30h0ln" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/认证/">认证</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/03/Java-Integer的默认缓存特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java Integer的默认缓存特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/04/不找网管通过iptables转换内外网地址2/">不找网管通过iptables转换内外网地址</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/03/Java-Integer的默认缓存特性/">Java Integer的默认缓存特性</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/03/使用私有协议控制打开浏览器/">使用私有协议控制打开浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/">MySQL函数小记GROUP_CONCAT</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 何建华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
