@@ -62,6 +62,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux上控制Tomcat定时启动关闭" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/04/Linux上控制Tomcat定时启动关闭/" class="article-date">
+  <time datetime="2018-01-04T05:20:45.000Z" itemprop="datePublished">2018-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/04/Linux上控制Tomcat定时启动关闭/">Linux上控制Tomcat定时启动关闭</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>应用部署后发现一个诡异的现象，虽通过定时器控制了应用执行时间，但是因代码中使用<strong>异步</strong>的方式去执行任务，导致代码出现不可控行为：<code>推送消息会在凌晨发出</code></p>
+<p>定时调度配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- rss定时抓取 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"rssJSHBScheduleCronTrigger"</span> <span class="attr">class</span>=<span class="string">"org.springframework.scheduling.quartz.CronTriggerBean"</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jobDetail"</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"rssJSHBScheduleJobDetail"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"startDelay"</span> <span class="attr">value</span>=<span class="string">"15000"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 每天8:00到18:00每隔35分钟执行 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cronExpression"</span> <span class="attr">value</span>=<span class="string">"0 0/35 8-18 * * ? *"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>被调用的推送消息的内部类（伪码）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RssServiceJShbNotice</span> <span class="keyword">extends</span> <span class="title">Thread</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      ArticleMessage message = <span class="keyword">new</span> ArticleMessage();</span><br><span class="line">      </span><br><span class="line">      String title = <span class="string">"【新】通知公告"</span>;</span><br><span class="line">      String content = <span class="string">""</span>;</span><br><span class="line">      <span class="keyword">for</span> (String n_title : newNotice) &#123;</span><br><span class="line">        content = content + n_title + <span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">       Article article = <span class="keyword">new</span> Article(title, content, <span class="keyword">null</span>, <span class="keyword">null</span>, launchApp);</span><br><span class="line">	   message.addArticle(article);</span><br><span class="line">	   AppAccount account=AppAccount.loginByAccessToken(platform_ip, access_token);  			              account.sendOcuMessageToUsers(<span class="keyword">null</span>, message, ocu_id, ocu_secret);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">      log.error(<span class="string">"推送消息报错了==================================push"</span>);</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="修正办法"><a href="#修正办法" class="headerlink" title="修正办法"></a>修正办法</h4><ol>
+<li>把消息推送改为同步</li>
+<li>为避免程序被触发，直接关闭在早上7点再启动</li>
+</ol>
+<h4 id="Linux上定时关闭和启动Tomcat"><a href="#Linux上定时关闭和启动Tomcat" class="headerlink" title="Linux上定时关闭和启动Tomcat"></a>Linux上定时关闭和启动Tomcat</h4><p>启停脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>定义环境变量</span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-7-oracle</span><br><span class="line">export CLASSPATH=$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"><span class="meta">#</span> 获取tomcat进程ID</span><br><span class="line">TomcatID=$(ps -ef |grep tomcat |grep -w '/home/ubuntu/tomcat/apache-tomcat-7.0.73'|grep -v 'grep'|awk '&#123;print $2&#125;')</span><br><span class="line"><span class="meta">#</span> tomcat启动程序</span><br><span class="line">StartTomcat=/home/ubuntu/tomcat/apache-tomcat-7.0.73/bin/startup.sh</span><br><span class="line"></span><br><span class="line">echo "[info]脚本关闭tomcat...[$(date +'%F %H:%M:%S')]"</span><br><span class="line"><span class="meta">#</span>判断tomcat进程是否存在</span><br><span class="line">if [ $TomcatID ]</span><br><span class="line">then</span><br><span class="line">    echo "[info]当前tomcat进程ID为:$TomcatID"</span><br><span class="line">    echo "[info]杀掉tomcat进程"</span><br><span class="line">        kill -9 $TomcatID  # 杀掉原tomcat进程 </span><br><span class="line">        echo "[info]tomcat..杀掉.[$(date +'%F %H:%M:%S')]" &gt;&gt;  /home/ubuntu/tomcat/log.log   </span><br><span class="line">else</span><br><span class="line">    echo "[error]tomcat不存在!"</span><br><span class="line">    #rm -rf $TomcatCache</span><br><span class="line">    $StartTomcat &gt;&gt; /home/ubuntu/tomcat/log.log  </span><br><span class="line">fi</span><br><span class="line">echo "------------------------------"</span><br></pre></td></tr></table></figure>
+<p>赋予脚本执行权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +777 脚本名称</span><br></pre></td></tr></table></figure>
+<p>添加调度，cron脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> Edit this file to introduce tasks to be run by cron.</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> Each task to run has to be defined through a single line</span><br><span class="line"><span class="meta">#</span> indicating with different fields when the task will be run</span><br><span class="line"><span class="meta">#</span> and what command to run for the task</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> To define the time you can provide concrete values for</span><br><span class="line"><span class="meta">#</span> minute (m), hour (h), day of month (dom), month (mon),</span><br><span class="line"><span class="meta">#</span> and day of week (dow) or use '*' in these fields (for 'any').# </span><br><span class="line"><span class="meta">#</span> Notice that tasks will be started based on the cron's system</span><br><span class="line"><span class="meta">#</span> daemon's notion of time and timezones.</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> Output of the crontab jobs (including errors) is sent through</span><br><span class="line"><span class="meta">#</span> email to the user the crontab file belongs to (unless redirected).</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> For example, you can run a backup of all your user accounts</span><br><span class="line"><span class="meta">#</span> at 5 a.m every week with:</span><br><span class="line"><span class="meta">#</span> 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> For more information see the manual pages of crontab(5) and cron(8)</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> m h  dom mon dow   command</span><br><span class="line"><span class="meta">#</span>#7点启动</span><br><span class="line">0 7 * * * /home/ubuntu/tomcat/shell/tomcat_start.sh </span><br><span class="line"><span class="meta">#</span>#20点关闭</span><br><span class="line">0 20 * * * /home/ubuntu/tomcat/shell/tomcat_killed.sh</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://localhost/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjc06oagg0001r8uv3ygvawus" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关闭/">关闭</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-不找网管通过iptables转换内外网地址2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/04/不找网管通过iptables转换内外网地址2/" class="article-date">
@@ -115,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjc000jl60004q8uvwt30h0ln" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjc06oagk0004r8uvu3z0aphi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/认证/">认证</a></li></ul>
@@ -167,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjc000jl60000q8uvn0ujvdtf" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjc06oafy0000r8uv7f0bwpkn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -226,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjc000jl60003q8uvz6824bbf" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjc06oagl0005r8uvky2q2jm5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li></ul>
@@ -311,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc000jl60001q8uv3cax3o00" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc06oagj0003r8uvacuh805s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -336,7 +390,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启动/">启动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li></ul>
     </div>
   </div>
 
@@ -346,7 +400,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a>
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a>
     </div>
   </div>
 
@@ -366,6 +420,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/04/Linux上控制Tomcat定时启动关闭/">Linux上控制Tomcat定时启动关闭</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/不找网管通过iptables转换内外网地址2/">不找网管通过iptables转换内外网地址</a>
