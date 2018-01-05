@@ -5,22 +5,20 @@
   
 
   
-  <title>MySQL函数小记GROUP_CONCAT | Top Say</title>
+  <title>好心办坏事小心隐式类型转换 | Top Say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
-<meta name="keywords" content="mysql">
+  <meta name="description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456createtable  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
+<meta name="keywords" content="mysql,类型转换">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL函数小记GROUP_CONCAT">
-<meta property="og:url" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/index.html">
+<meta property="og:title" content="好心办坏事小心隐式类型转换">
+<meta property="og:url" content="http://localhost/2015/05/30/好心办坏事小心隐式类型转换/index.html">
 <meta property="og:site_name" content="Top Say">
-<meta property="og:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
+<meta property="og:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456createtable  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
-<meta property="og:updated_time" content="2018-01-04T14:14:53.539Z">
+<meta property="og:updated_time" content="2018-01-05T04:19:33.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL函数小记GROUP_CONCAT">
-<meta name="twitter:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
-<meta name="twitter:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
+<meta name="twitter:title" content="好心办坏事小心隐式类型转换">
+<meta name="twitter:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456createtable  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
   
     <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
   
@@ -67,12 +65,16 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-MySQL函数小记GROUP_CONCAT" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-好心办坏事小心隐式类型转换" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" class="article-date">
-  <time datetime="2018-01-02T15:56:52.000Z" itemprop="datePublished">2018-01-02</time>
+    <a href="/2015/05/30/好心办坏事小心隐式类型转换/" class="article-date">
+  <time datetime="2015-05-30T04:19:33.000Z" itemprop="datePublished">2015-05-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -81,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL函数小记GROUP_CONCAT
+      好心办坏事小心隐式类型转换
     </h1>
   
 
@@ -90,61 +92,28 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
-<h2 id="或者修改配置文件"><a href="#或者修改配置文件" class="headerlink" title="或者修改配置文件"></a>或者修改配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>表b_department结构</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>列名</th>
-<th style="text-align:left">字段类型</th>
-<th style="text-align:center">为主键</th>
-<th style="text-align:center">为外键</th>
-<th style="text-align:center">可为空</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>department_id</td>
-<td style="text-align:left">int(11)</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">否</td>
-</tr>
-<tr>
-<td>department_name</td>
-<td style="text-align:left">varchar(50)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">否</td>
-</tr>
-<tr>
-<td>p_department</td>
-<td style="text-align:left">int(11)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>SQL语句</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.department_id,a.department_name,a.p_department, </span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_id) <span class="keyword">as</span> child_ids,</span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_name) <span class="keyword">as</span> child_names</span><br><span class="line"><span class="keyword">from</span> sys_department a</span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">join</span> sys_department b <span class="keyword">on</span> a.department_id=b.p_department</span><br><span class="line">  <span class="keyword">where</span> a.p_department=<span class="number">1</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a.department_id,a.department_name,a.p_department</span><br></pre></td></tr></table></figure>
-<p>执行结果 <img src="/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png" alt="image"></p>
+<p>数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些<u><strong>看起来</strong></u>对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题</p>
+<p>创建表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">createtable  CONVERT_SHOW   </span><br><span class="line">(  </span><br><span class="line">  USER_ID              bigint(8),  </span><br><span class="line">  NAME                 varchar(8),  </span><br><span class="line">  OP_TIME              timestamp default CURRENT_TIMESTAMP</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>插入模拟数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">0</span>,<span class="string">'cast'</span>);  </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'cast2'</span>);  </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'cast3'</span>);</span><br></pre></td></tr></table></figure>
+<p>前台读取表中的数据一般使用的查询SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> USER_ID,<span class="keyword">NAME</span>,OP_TIME <span class="keyword">from</span> CONVERT_SHOW <span class="keyword">where</span> USER_ID= ?;</span><br></pre></td></tr></table></figure>
+<p>但会有去省事的直接以<code>&#39;参数值&#39;</code> 来替换<code>&quot;?&quot;</code>，替换后的<code>SQL</code>可能是这样的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> USER_ID,<span class="keyword">NAME</span>,OP_TIME <span class="keyword">from</span> CONVERT_SHOW <span class="keyword">where</span> USER_ID= <span class="string">'查询参数'</span>;</span><br></pre></td></tr></table></figure>
+<p>这时，隐藏的一个陷阱就可能出现：数据库为了SQL正常工作，会使用隐式类型转换使得参数变成<code>bigint</code>类型，如果传递的参数不是整数会出现什么样的情况？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">cast</span>(<span class="string">'查询参数'</span> <span class="keyword">as</span> <span class="keyword">UNSIGNED</span> ) ;</span><br></pre></td></tr></table></figure>
+<p>结果是：0</p>
+<p>如果恰好表里存在一条user<em>id为0的数据（真遇到了，不然也不会有这篇文章），就会被返回，接着就是让人的各种着急，连在<code>Google</code>上使用什么样的关键字来描述问题都非常困难^</em>^</p>
+<p>如果数据访问层能够做到对参数进行类型校验，肯定可以避免问题出现，但大多时候都是无心挖出来的坑，那真是满头的黑线啊！！！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjc1fr8lr0000q8uvl9fzxh4x" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjc1fr8m60005q8uvdqb70vsy" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类型转换/">类型转换</a></li></ul>
 
     </footer>
   </div>
@@ -152,20 +121,15 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/03/使用私有协议控制打开浏览器/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          使用私有协议控制打开浏览器
+          MySQL函数小记GROUP_CONCAT
         
       </div>
     </a>
   
-  
-    <a href="/2015/05/30/好心办坏事小心隐式类型转换/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">好心办坏事小心隐式类型转换</div>
-    </a>
   
 </nav>
 
