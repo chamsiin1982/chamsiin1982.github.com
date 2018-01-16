@@ -5,22 +5,24 @@
   
 
   
-  <title>MySQL函数小记GROUP_CONCAT | Top Say</title>
+  <title>VirtualBox虚拟机Ubuntu添加磁盘 | Top Say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
-<meta name="keywords" content="mysql">
+  <meta name="description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb  首先输入命令：n(添加新分区)之后回车：接着输入命令:p剩下步骤全按回车默认，最后输入命令w保存分区信息 创建分区为 /dev/sdb1">
+<meta name="keywords" content="ubuntu,磁盘扩充">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL函数小记GROUP_CONCAT">
-<meta property="og:url" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/index.html">
+<meta property="og:title" content="VirtualBox虚拟机Ubuntu添加磁盘">
+<meta property="og:url" content="http://localhost/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/index.html">
 <meta property="og:site_name" content="Top Say">
-<meta property="og:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
+<meta property="og:description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb  首先输入命令：n(添加新分区)之后回车：接着输入命令:p剩下步骤全按回车默认，最后输入命令w保存分区信息 创建分区为 /dev/sdb1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
-<meta property="og:updated_time" content="2018-01-04T14:14:53.539Z">
+<meta property="og:image" content="http://localhost/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/adddisk.png">
+<meta property="og:image" content="http://localhost/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fdisk.png">
+<meta property="og:image" content="http://localhost/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fstab.png">
+<meta property="og:updated_time" content="2018-01-16T11:23:52.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL函数小记GROUP_CONCAT">
-<meta name="twitter:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
-<meta name="twitter:image" content="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
+<meta name="twitter:title" content="VirtualBox虚拟机Ubuntu添加磁盘">
+<meta name="twitter:description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb  首先输入命令：n(添加新分区)之后回车：接着输入命令:p剩下步骤全按回车默认，最后输入命令w保存分区信息 创建分区为 /dev/sdb1">
+<meta name="twitter:image" content="http://localhost/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/adddisk.png">
   
     <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
   
@@ -67,12 +69,16 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-MySQL函数小记GROUP_CONCAT" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-VirtualBox虚拟机Ubuntu添加磁盘" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" class="article-date">
-  <time datetime="2018-01-02T15:56:52.000Z" itemprop="datePublished">2018-01-02</time>
+    <a href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" class="article-date">
+  <time datetime="2018-01-16T10:40:45.000Z" itemprop="datePublished">2018-01-16</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ubuntu/">ubuntu</a>►<a class="article-category-link" href="/categories/ubuntu/磁盘/">磁盘</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -81,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL函数小记GROUP_CONCAT
+      VirtualBox虚拟机Ubuntu添加磁盘
     </h1>
   
 
@@ -90,61 +96,30 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
-<h2 id="或者修改配置文件"><a href="#或者修改配置文件" class="headerlink" title="或者修改配置文件"></a>或者修改配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>表b_department结构</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>列名</th>
-<th style="text-align:left">字段类型</th>
-<th style="text-align:center">为主键</th>
-<th style="text-align:center">为外键</th>
-<th style="text-align:center">可为空</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>department_id</td>
-<td style="text-align:left">int(11)</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">否</td>
-</tr>
-<tr>
-<td>department_name</td>
-<td style="text-align:left">varchar(50)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">否</td>
-</tr>
-<tr>
-<td>p_department</td>
-<td style="text-align:left">int(11)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>SQL语句</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.department_id,a.department_name,a.p_department, </span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_id) <span class="keyword">as</span> child_ids,</span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_name) <span class="keyword">as</span> child_names</span><br><span class="line"><span class="keyword">from</span> sys_department a</span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">join</span> sys_department b <span class="keyword">on</span> a.department_id=b.p_department</span><br><span class="line">  <span class="keyword">where</span> a.p_department=<span class="number">1</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a.department_id,a.department_name,a.p_department</span><br></pre></td></tr></table></figure>
-<p>执行结果 <img src="/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png" alt="image"></p>
+<p>公司有一台跑在<code>VirtualBox</code>上的SVN服务器，时间有点久远用的还部署<code>lvm</code>，最近发现磁盘满了得，加啊！</p>
+<h4 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h4><p>添加虚拟磁盘：</p>
+<p><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/adddisk.png" alt="添加磁盘"></p>
+<h4 id="创建磁盘"><a href="#创建磁盘" class="headerlink" title="创建磁盘"></a>创建磁盘</h4><p>首先 <code>sudo fdisk -l</code>  查看磁盘，获取到磁盘信息</p>
+<p><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fdisk.png" alt="fdisk"></p>
+<p>开始分区 <code>sudo fdisk /dev/sdb</code> </p>
+<p>首先输入命令：n(添加新分区)之后回车：<br>接着输入命令:p<br>剩下步骤全按回车默认，<br>最后输入命令w保存分区信息</p>
+<p>创建分区为 <code>/dev/sdb1</code></p>
+<h4 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdb1</span><br></pre></td></tr></table></figure>
+<h4 id="系统内挂载"><a href="#系统内挂载" class="headerlink" title="系统内挂载"></a>系统内挂载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir svn</span><br><span class="line">sudo mount /dev/sdb1 /home/svn</span><br></pre></td></tr></table></figure>
+<h4 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h4><p>修改 <code>/etc/fstab</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sdb1 /home/svn ext4 defaults 0 1</span><br></pre></td></tr></table></figure>
+<p>添加后：<br><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fstab.png" alt="fstab"></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>本来是想把磁盘挂在根目录的，发现根目录下挂载 原来的内容不能显示原目录下内容</p>
+<p><code>umount</code> 失败 ，只能通过 修改 <code>/etc/mtab</code> 文件处理</p>
+<p>[]: <a href="http://blog.csdn.net/ouyang_peng/article/details/53261599" target="_blank" rel="noopener">http://blog.csdn.net/ouyang_peng/article/details/53261599</a>    “virtualbox如何扩展Ubuntu虚拟磁盘”</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://localhost/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjchjxepp0014hguvkly7o2g9" class="article-share-link">Share</a>
+      <a data-url="http://localhost/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" data-id="cjchjxeou0001hguvsonstdjh" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li></ul>
 
     </footer>
   </div>
@@ -152,19 +127,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/03/使用私有协议控制打开浏览器/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          使用私有协议控制打开浏览器
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/05/30/好心办坏事小心隐式类型转换/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/01/04/Linux上控制Tomcat定时启动关闭/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">好心办坏事小心隐式类型转换</div>
+      <div class="article-nav-title">Linux上控制Tomcat定时启动关闭</div>
     </a>
   
 </nav>
