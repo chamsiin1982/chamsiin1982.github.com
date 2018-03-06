@@ -7,13 +7,16 @@
   
   <title>Top Say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="技术博客">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Top Say">
 <meta property="og:url" content="http://topsee.online/index.html">
 <meta property="og:site_name" content="Top Say">
+<meta property="og:description" content="技术博客">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Top Say">
+<meta name="twitter:description" content="技术博客">
   
     <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
   
@@ -36,6 +39,10 @@
       <h1 id="logo-wrap">
         <a href="/" id="logo">Top Say</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">技术博客</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -61,6 +68,72 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用JSqlParser加强动态拼接SQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/06/使用JSqlParser加强动态拼接SQL/" class="article-date">
+  <time datetime="2018-02-06T07:53:12.000Z" itemprop="datePublished">2018-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Report/">Report</a>►<a class="article-category-link" href="/categories/Report/SQL/">SQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/使用JSqlParser加强动态拼接SQL/">使用JSqlParser加强动态拼接SQL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>项目里有不少需要导出的数据，渐渐演化成固定报表，使用了<code>GitHub</code>上开源项目  <a href="https://github.com/xianrendzw/EasyReport" target="_blank" rel="noopener">EasyReport</a> 基本能满足日常需要，但比较明显的问题是：<code>条件</code>是靠<code>占位</code>替换变量的方式，虽有<code>默认值</code>，但是附加条件时任不够灵活。</p>
+<p>为了方便使用，就对项目做了部分改造：</p>
+<p><img src="/2018/02/06/使用JSqlParser加强动态拼接SQL/rebuild_after.png" alt="改造后报表参数配置页"></p>
+<ol>
+<li><p>将条件调整为 <code>附加</code>、<code>替换</code>两种</p>
+<ul>
+<li><p><code>附加</code>指找到 主执行SQL的<code>where</code> 部分，如当前参数的值<code>不为空值</code>则附加到<code>where</code> 后</p>
+</li>
+<li><p><code>替换</code>指通过特定的语法格式就行占位，再进行变量替换返回完整的可执行SQL，如为替换代码与原系统功能一致</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>​    利用 <a href="https://github.com/JSQLParser/JSqlParser" target="_blank" rel="noopener">JSQLParser</a> 解析SQL，根据配置附加执行内容,代码参考  <code>com.easytoolsoft.easyreport.domain.report.util.JsqlParserWhereConditionHelper</code></li>
+</ol>
+<p>最终代码：</p>
+<p><a href="https://github.com/chamsiin1982/EasyReport-2.0.16.1013_Beta" target="_blank" rel="noopener">https://github.com/chamsiin1982/EasyReport-2.0.16.1013_Beta</a></p>
+<p>后续可继续定制</p>
+<ul>
+<li>分页支持：配置可分页报表</li>
+<li>改造报表渲染方式：现报表组装都是在服务端，当报表数据量超过一定量之后拼接的表格、样式内容就太多，服务端直接返回JSON和报表配置使用JS客户端进行渲染</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/" data-id="cjefe1smr0009oouv0izh97rj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSqlParser/">JSqlParser</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLReport/">SQLReport</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-VirtualBox虚拟机Ubuntu添加磁盘" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -109,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" data-id="cjefdgady0001owuv10fnunxh" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" data-id="cjefe1smr0005oouvx3vpj9fb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li></ul>
@@ -163,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjefdgady0003owuv0bdljppl" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjefe1smr0003oouv9t6yua4y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关闭/">关闭</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li></ul>
@@ -229,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjefdgady0006owuvaqoogr12" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjefe1smb0000oouvl14zq4eq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/认证/">认证</a></li></ul>
@@ -282,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjefdgadi0000owuvy1o4w4z0" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjefe1smb0001oouvig2nnlh3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -341,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjefdgady0009owuvienq1d5u" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjefe1smr0007oouvzmyrck0f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li></ul>
@@ -427,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjefdgady0005owuv8pnjr4n7" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjefe1smr0004oouvatbzxc6k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -484,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjefdgady000aowuv1050wixr" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjefe1smr000boouvnt1vz9j9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类型转换/">类型转换</a></li></ul>
@@ -506,7 +579,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/">ubuntu</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/磁盘/">磁盘</a></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Report/">Report</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Report/SQL/">SQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/">ubuntu</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/磁盘/">磁盘</a></li></ul></li></ul>
     </div>
   </div>
 
@@ -516,7 +589,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启动/">启动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类型转换/">类型转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSqlParser/">JSqlParser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLReport/">SQLReport</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启动/">启动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类型转换/">类型转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li></ul>
     </div>
   </div>
 
@@ -526,7 +599,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/磁盘扩充/" style="font-size: 10px;">磁盘扩充</a> <a href="/tags/类型转换/" style="font-size: 10px;">类型转换</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a>
+      <a href="/tags/JSqlParser/" style="font-size: 10px;">JSqlParser</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQLReport/" style="font-size: 10px;">SQLReport</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/磁盘扩充/" style="font-size: 10px;">磁盘扩充</a> <a href="/tags/类型转换/" style="font-size: 10px;">类型转换</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a>
     </div>
   </div>
 
@@ -535,7 +608,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li></ul>
     </div>
   </div>
 
@@ -546,6 +619,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/06/使用JSqlParser加强动态拼接SQL/">使用JSqlParser加强动态拼接SQL</a>
+          </li>
         
           <li>
             <a href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/">VirtualBox虚拟机Ubuntu添加磁盘</a>
@@ -561,10 +638,6 @@
         
           <li>
             <a href="/2018/01/03/Java-Integer的默认缓存特性/">Java Integer的默认缓存特性</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/03/使用私有协议控制打开浏览器/">使用私有协议控制打开浏览器</a>
           </li>
         
       </ul>

@@ -5,20 +5,22 @@
   
 
   
-  <title>好心办坏事小心隐式类型转换 | Top Say</title>
+  <title>使用JSqlParser加强动态拼接SQL | Top Say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
-<meta name="keywords" content="mysql,类型转换">
+  <meta name="description" content="项目里有不少需要导出的数据，渐渐演化成固定报表，使用了GitHub上开源项目  EasyReport 基本能满足日常需要，但比较明显的问题是：条件是靠占位替换变量的方式，虽有默认值，但是附加条件时任不够灵活。 为了方便使用，就对项目做了部分改造：   将条件调整为 附加、替换两种  附加指找到 主执行SQL的where 部分，如当前参数的值不为空值则附加到where 后  替换指通过特定的语法格">
+<meta name="keywords" content="SQL,JSqlParser,SQLReport">
 <meta property="og:type" content="article">
-<meta property="og:title" content="好心办坏事小心隐式类型转换">
-<meta property="og:url" content="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/index.html">
+<meta property="og:title" content="使用JSqlParser加强动态拼接SQL">
+<meta property="og:url" content="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/index.html">
 <meta property="og:site_name" content="Top Say">
-<meta property="og:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
+<meta property="og:description" content="项目里有不少需要导出的数据，渐渐演化成固定报表，使用了GitHub上开源项目  EasyReport 基本能满足日常需要，但比较明显的问题是：条件是靠占位替换变量的方式，虽有默认值，但是附加条件时任不够灵活。 为了方便使用，就对项目做了部分改造：   将条件调整为 附加、替换两种  附加指找到 主执行SQL的where 部分，如当前参数的值不为空值则附加到where 后  替换指通过特定的语法格">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-05T05:55:52.051Z">
+<meta property="og:image" content="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/rebuild_after.png">
+<meta property="og:updated_time" content="2018-03-06T08:24:11.550Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="好心办坏事小心隐式类型转换">
-<meta name="twitter:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
+<meta name="twitter:title" content="使用JSqlParser加强动态拼接SQL">
+<meta name="twitter:description" content="项目里有不少需要导出的数据，渐渐演化成固定报表，使用了GitHub上开源项目  EasyReport 基本能满足日常需要，但比较明显的问题是：条件是靠占位替换变量的方式，虽有默认值，但是附加条件时任不够灵活。 为了方便使用，就对项目做了部分改造：   将条件调整为 附加、替换两种  附加指找到 主执行SQL的where 部分，如当前参数的值不为空值则附加到where 后  替换指通过特定的语法格">
+<meta name="twitter:image" content="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/rebuild_after.png">
   
     <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
   
@@ -69,14 +71,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-好心办坏事小心隐式类型转换" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-使用JSqlParser加强动态拼接SQL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/05/30/好心办坏事小心隐式类型转换/" class="article-date">
-  <time datetime="2015-05-30T04:19:33.000Z" itemprop="datePublished">2015-05-30</time>
+    <a href="/2018/02/06/使用JSqlParser加强动态拼接SQL/" class="article-date">
+  <time datetime="2018-02-06T07:53:12.000Z" itemprop="datePublished">2018-02-06</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+    <a class="article-category-link" href="/categories/Report/">Report</a>►<a class="article-category-link" href="/categories/Report/SQL/">SQL</a>
   </div>
 
   </div>
@@ -87,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      好心办坏事小心隐式类型转换
+      使用JSqlParser加强动态拼接SQL
     </h1>
   
 
@@ -96,28 +98,37 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些<u><strong>看起来</strong></u>对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题</p>
-<p>创建表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table  CONVERT_SHOW   </span><br><span class="line">(  </span><br><span class="line">  USER_ID              bigint(8),  </span><br><span class="line">  NAME                 varchar(8),  </span><br><span class="line">  OP_TIME              timestamp default CURRENT_TIMESTAMP</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>插入模拟数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">0</span>,<span class="string">'cast'</span>);  </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'cast2'</span>);  </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'cast3'</span>);</span><br></pre></td></tr></table></figure>
-<p>前台读取表中的数据一般使用的查询SQL</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> USER_ID,<span class="keyword">NAME</span>,OP_TIME <span class="keyword">from</span> CONVERT_SHOW <span class="keyword">where</span> USER_ID= ?;</span><br></pre></td></tr></table></figure>
-<p>但会有去省事的直接以<code>&#39;参数值&#39;</code> 来替换<code>&quot;?&quot;</code>，替换后的<code>SQL</code>可能是这样的（参数有点夸张，但传递的查询值真可能什么都有）</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> USER_ID,<span class="keyword">NAME</span>,OP_TIME <span class="keyword">from</span> CONVERT_SHOW <span class="keyword">where</span> USER_ID= <span class="string">'查询参数'</span>;</span><br></pre></td></tr></table></figure>
-<p>这时，隐藏的一个陷阱就可能出现：数据库为了SQL正常工作，会使用隐式类型转换使得参数变成<code>bigint</code>类型，如果传递的参数不是整数会出现什么样的情况？</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">cast</span>(<span class="string">'查询参数'</span> <span class="keyword">as</span> <span class="keyword">UNSIGNED</span> ) ;</span><br></pre></td></tr></table></figure>
-<p>结果是：0</p>
-<p>如果恰好表里存在一条user<em>id为0的数据（真遇到了，不然也不会有这篇文章），就会被返回，接着就是让人的各种着急，连在<code>Google</code>上使用什么样的关键字来描述问题都非常困难^</em>^</p>
-<p>如果数据访问层能够做到对参数进行类型校验，肯定可以避免问题出现，但大多时候都是无心挖出来的坑，那真是满头的黑线啊！！！</p>
+<p>项目里有不少需要导出的数据，渐渐演化成固定报表，使用了<code>GitHub</code>上开源项目  <a href="https://github.com/xianrendzw/EasyReport" target="_blank" rel="noopener">EasyReport</a> 基本能满足日常需要，但比较明显的问题是：<code>条件</code>是靠<code>占位</code>替换变量的方式，虽有<code>默认值</code>，但是附加条件时任不够灵活。</p>
+<p>为了方便使用，就对项目做了部分改造：</p>
+<p><img src="/2018/02/06/使用JSqlParser加强动态拼接SQL/rebuild_after.png" alt="改造后报表参数配置页"></p>
+<ol>
+<li><p>将条件调整为 <code>附加</code>、<code>替换</code>两种</p>
+<ul>
+<li><p><code>附加</code>指找到 主执行SQL的<code>where</code> 部分，如当前参数的值<code>不为空值</code>则附加到<code>where</code> 后</p>
+</li>
+<li><p><code>替换</code>指通过特定的语法格式就行占位，再进行变量替换返回完整的可执行SQL，如为替换代码与原系统功能一致</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>​    利用 <a href="https://github.com/JSQLParser/JSqlParser" target="_blank" rel="noopener">JSQLParser</a> 解析SQL，根据配置附加执行内容,代码参考  <code>com.easytoolsoft.easyreport.domain.report.util.JsqlParserWhereConditionHelper</code></li>
+</ol>
+<p>最终代码：</p>
+<p><a href="https://github.com/chamsiin1982/EasyReport-2.0.16.1013_Beta" target="_blank" rel="noopener">https://github.com/chamsiin1982/EasyReport-2.0.16.1013_Beta</a></p>
+<p>后续可继续定制</p>
+<ul>
+<li>分页支持：配置可分页报表</li>
+<li>改造报表渲染方式：现报表组装都是在服务端，当报表数据量超过一定量之后拼接的表格、样式内容就太多，服务端直接返回JSON和报表配置使用JS客户端进行渲染</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjefe1smr000boouvnt1vz9j9" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/" data-id="cjefe1smr0009oouv0izh97rj" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类型转换/">类型转换</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSqlParser/">JSqlParser</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLReport/">SQLReport</a></li></ul>
 
     </footer>
   </div>
@@ -125,15 +136,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MySQL函数小记GROUP_CONCAT
-        
-      </div>
-    </a>
   
+    <a href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VirtualBox虚拟机Ubuntu添加磁盘</div>
+    </a>
   
 </nav>
 
