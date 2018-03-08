@@ -5,20 +5,26 @@
   
 
   
-  <title>好心办坏事小心隐式类型转换 | Top Say</title>
+  <title>【译】Windows远程桌面访问Ubuntu 16.04 | Top Say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
-<meta name="keywords" content="mysql,类型转换">
+  <meta name="description" content="以前连接Ubuntu远程桌面都是使用的xrdp，要在Ubuntu上安装一堆软件，实际Ubuntu 16.04 提供了远程连接 Desktop Shareing 结合 VNC就能解决 原贴：http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/ 主要介绍通过启用/配置 VNC服务，使得Ubuntu 16.04">
+<meta name="keywords" content="ubuntu,windows,远程桌面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="好心办坏事小心隐式类型转换">
-<meta property="og:url" content="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/index.html">
+<meta property="og:title" content="【译】Windows远程桌面访问Ubuntu 16.04">
+<meta property="og:url" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/index.html">
 <meta property="og:site_name" content="Top Say">
-<meta property="og:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
+<meta property="og:description" content="以前连接Ubuntu远程桌面都是使用的xrdp，要在Ubuntu上安装一堆软件，实际Ubuntu 16.04 提供了远程连接 Desktop Shareing 结合 VNC就能解决 原贴：http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/ 主要介绍通过启用/配置 VNC服务，使得Ubuntu 16.04">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-05T05:55:52.051Z">
+<meta property="og:image" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/Windows远程桌面访问Ubuntu16/launch-vino-config.jpg">
+<meta property="og:image" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/Windows远程桌面访问Ubuntu16/enable-vino-server.jpg">
+<meta property="og:image" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/Windows远程桌面访问Ubuntu16/security-notsupported.jpg">
+<meta property="og:image" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/Windows远程桌面访问Ubuntu16/vino-disable-encryption.jpg">
+<meta property="og:image" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/Windows远程桌面访问Ubuntu16/remote-display.png">
+<meta property="og:updated_time" content="2018-03-08T06:14:06.225Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="好心办坏事小心隐式类型转换">
-<meta name="twitter:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
+<meta name="twitter:title" content="【译】Windows远程桌面访问Ubuntu 16.04">
+<meta name="twitter:description" content="以前连接Ubuntu远程桌面都是使用的xrdp，要在Ubuntu上安装一堆软件，实际Ubuntu 16.04 提供了远程连接 Desktop Shareing 结合 VNC就能解决 原贴：http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/ 主要介绍通过启用/配置 VNC服务，使得Ubuntu 16.04">
+<meta name="twitter:image" content="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/Windows远程桌面访问Ubuntu16/launch-vino-config.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Top Say" type="application/atom+xml">
   
@@ -69,14 +75,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-好心办坏事小心隐式类型转换" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Windows远程桌面访问Ubuntu16" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/05/30/好心办坏事小心隐式类型转换/" class="article-date">
-  <time datetime="2015-05-30T04:19:33.000Z" itemprop="datePublished">2015-05-30</time>
+    <a href="/2018/03/07/Windows远程桌面访问Ubuntu16/" class="article-date">
+  <time datetime="2018-03-07T05:52:45.000Z" itemprop="datePublished">2018-03-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+    <a class="article-category-link" href="/categories/ubuntu/">ubuntu</a>►<a class="article-category-link" href="/categories/ubuntu/远程桌面/">远程桌面</a>
   </div>
 
   </div>
@@ -87,7 +93,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      好心办坏事小心隐式类型转换
+      【译】Windows远程桌面访问Ubuntu 16.04
     </h1>
   
 
@@ -96,28 +102,46 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些<u><strong>看起来</strong></u>对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题</p>
-<p>创建表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table  CONVERT_SHOW   </span><br><span class="line">(  </span><br><span class="line">  USER_ID              bigint(8),  </span><br><span class="line">  NAME                 varchar(8),  </span><br><span class="line">  OP_TIME              timestamp default CURRENT_TIMESTAMP</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>插入模拟数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">0</span>,<span class="string">'cast'</span>);  </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'cast2'</span>);  </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> CONVERT_SHOW(user_id,<span class="keyword">name</span>)<span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'cast3'</span>);</span><br></pre></td></tr></table></figure>
-<p>前台读取表中的数据一般使用的查询SQL</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> USER_ID,<span class="keyword">NAME</span>,OP_TIME <span class="keyword">from</span> CONVERT_SHOW <span class="keyword">where</span> USER_ID= ?;</span><br></pre></td></tr></table></figure>
-<p>但会有去省事的直接以<code>&#39;参数值&#39;</code> 来替换<code>&quot;?&quot;</code>，替换后的<code>SQL</code>可能是这样的（参数有点夸张，但传递的查询值真可能什么都有）</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> USER_ID,<span class="keyword">NAME</span>,OP_TIME <span class="keyword">from</span> CONVERT_SHOW <span class="keyword">where</span> USER_ID= <span class="string">'查询参数'</span>;</span><br></pre></td></tr></table></figure>
-<p>这时，隐藏的一个陷阱就可能出现：数据库为了SQL正常工作，会使用隐式类型转换使得参数变成<code>bigint</code>类型，如果传递的参数不是整数会出现什么样的情况？</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">cast</span>(<span class="string">'查询参数'</span> <span class="keyword">as</span> <span class="keyword">UNSIGNED</span> ) ;</span><br></pre></td></tr></table></figure>
-<p>结果是：0</p>
-<p>如果恰好表里存在一条user<em>id为0的数据（真遇到了，不然也不会有这篇文章），就会被返回，接着就是让人的各种着急，连在<code>Google</code>上使用什么样的关键字来描述问题都非常困难^</em>^</p>
-<p>如果数据访问层能够做到对参数进行类型校验，肯定可以避免问题出现，但大多时候都是无心挖出来的坑，那真是满头的黑线啊！！！</p>
+<p>以前连接Ubuntu远程桌面都是使用的xrdp，要在Ubuntu上安装一堆软件，实际Ubuntu 16.04 提供了远程连接 <strong>Desktop Shareing</strong> 结合 <strong>VNC</strong>就能解决</p>
+<p>原贴：<a href="http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/" target="_blank" rel="noopener">http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/</a></p>
+<p>主要介绍通过启用/配置 VNC服务，使得Ubuntu 16.04 支持远程桌面访问，具体步骤</p>
+<p>1.) Ubuntu桌面版提供了 VNC 服务，可通过 <strong>Desktop Sharing</strong>来配置</p>
+<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/./Windows远程桌面访问Ubuntu16/launch-vino-config.jpg" alt="Desktop Sharing"></p>
+<p>2.）配置项包括</p>
+<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/./Windows远程桌面访问Ubuntu16/enable-vino-server.jpg" alt="远程访问选项"></p>
+<p>共享</p>
+<ul>
+<li>允许远程访问当前桌面</li>
+<li>运行远程访问者控制桌面（可选）</li>
+</ul>
+<p>安全</p>
+<ul>
+<li>远程访问需要确认</li>
+<li>需要独立密码远程访问</li>
+<li>通过公网访问，如果当前路由器开启了UPnP</li>
+</ul>
+<p>提醒显示远程连接图标</p>
+<ul>
+<li>一直显示</li>
+<li>有远程连接时</li>
+<li>从不显示</li>
+</ul>
+<p>3.）关闭加密</p>
+<p>直接使用TigerVNC Viewer连接服务时，会弹出不支持的安全类型，需关闭安全选项</p>
+<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/./Windows远程桌面访问Ubuntu16/security-notsupported.jpg" alt="安全选项不支持"></p>
+<p>可通过 <strong>DCONF Editor</strong>配置“远程访问“  <strong>需加密</strong>选项 关闭</p>
+<p>路径<strong>org -&gt; gnome -&gt; desktop -&gt; remote-access</strong></p>
+<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/./Windows远程桌面访问Ubuntu16/vino-disable-encryption.jpg" alt="关闭远程加密"></p>
+<p>客户端再次连接，可以访问</p>
+<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/./Windows远程桌面访问Ubuntu16/remote-display.png" alt="远程访问"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjei4b5r0001fr4uvtonh616w" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/" data-id="cjei4b5pp0001r4uvd6cu9ubp" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类型转换/">类型转换</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/远程桌面/">远程桌面</a></li></ul>
 
     </footer>
   </div>
@@ -125,15 +149,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/02/MySQL函数小记GROUP_CONCAT/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MySQL函数小记GROUP_CONCAT
-        
-      </div>
-    </a>
   
+    <a href="/2018/02/06/使用JSqlParser加强动态拼接SQL/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用JSqlParser加强动态拼接SQL</div>
+    </a>
   
 </nav>
 
