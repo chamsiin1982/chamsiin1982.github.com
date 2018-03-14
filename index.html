@@ -69,6 +69,108 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ubuntu上JDK安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/14/ubuntu上JDK安装/" class="article-date">
+  <time datetime="2018-03-14T03:12:31.000Z" itemprop="datePublished">2018-03-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ubuntu/">ubuntu</a>►<a class="article-category-link" href="/categories/ubuntu/JDK/">JDK</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/14/ubuntu上JDK安装/">Ubuntu上JDK安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>JDK在linux系统可选择开源版本Openjdk、oracle版jdk，oracle JDK既可以通过添加ppa源命令行安装，也可以去官网下载jdk压缩包安装。安装方式及步骤。</p>
+<h3 id="安装OpenJDK"><a href="#安装OpenJDK" class="headerlink" title="安装OpenJDK"></a>安装OpenJDK</h3><ol>
+<li>更新软件源列表</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<ol>
+<li>安装openjdk-8</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install   openjdk-8-jdk</span><br></pre></td></tr></table></figure>
+<ol>
+<li>查看版本</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<h3 id="PPA仓库安装Oracle-JDK"><a href="#PPA仓库安装Oracle-JDK" class="headerlink" title="PPA仓库安装Oracle JDK"></a>PPA仓库安装Oracle JDK</h3><ol>
+<li>安装PPA</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br></pre></td></tr></table></figure>
+<ol>
+<li>添加源</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:webupd8team/java</span><br></pre></td></tr></table></figure>
+<ol>
+<li>更新软件源列表</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<ol>
+<li>安装JDK</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：安装过程需要同意Oracle许可协议</p>
+<h3 id="手动安装JDK"><a href="#手动安装JDK" class="headerlink" title="手动安装JDK"></a>手动安装JDK</h3><ol>
+<li>oracle 官网下载JDK （jdk-8u161-linux-x64.tar.gz）</li>
+</ol>
+<ol>
+<li>解压到指定目录</li>
+</ol>
+<ul>
+<li>创建目录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /usr/lib/jvm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解压到目录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-8u161-linux-x64.tar.gz -C /usr/lib/jvm</span><br></pre></td></tr></table></figure>
+<ol>
+<li>配置环境变量 <code>~/.bashrc</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>set oracle jdk environment</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_161  ## 目录要对应jdk目录</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre  </span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib  </span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+<ol>
+<li>环境变量生效</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<ol>
+<li>注册JDK</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives –install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_161/bin/java 300</span><br></pre></td></tr></table></figure>
+<h3 id="多版本JDK切换"><a href="#多版本JDK切换" class="headerlink" title="多版本JDK切换"></a>多版本JDK切换</h3><p>系统中有多个版本的JDK，可进行默认版本切换</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/03/14/ubuntu上JDK安装/chose_jdk.png" alt="选择JDK"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://topsee.online/2018/03/14/ubuntu上JDK安装/" data-id="cjeqll7r30009dguvy405k2ox" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK/">JDK</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Windows远程桌面访问Ubuntu16" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/07/Windows远程桌面访问Ubuntu16/" class="article-date">
@@ -132,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/" data-id="cjei54tt00005ysuv6xlmj5ej" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/03/07/Windows远程桌面访问Ubuntu16/" data-id="cjeqll7r30007dguvs37w95gx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/远程桌面/">远程桌面</a></li></ul>
@@ -198,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/" data-id="cjei54tt00004ysuvvwj9v78d" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/02/06/使用JSqlParser加强动态拼接SQL/" data-id="cjeqll7r3000cdguv0is1u8no" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSqlParser/">JSqlParser</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLReport/">SQLReport</a></li></ul>
@@ -257,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" data-id="cjei54tt00009ysuvgnvdqbeu" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" data-id="cjeqll7r30006dguv69ifo1ws" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li></ul>
@@ -311,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjei54tt00000ysuvah7lpwx8" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/04/Linux上控制Tomcat定时启动关闭/" data-id="cjeqll7r30003dguvoosy0kfi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关闭/">关闭</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li></ul>
@@ -377,7 +479,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjei54tt00008ysuv4sz40vri" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/04/不找网管通过iptables转换内外网地址2/" data-id="cjeqll7r3000bdguvnsyuxl3b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/认证/">认证</a></li></ul>
@@ -430,7 +532,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjei54tt00001ysuvmplqx4e0" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/03/Java-Integer的默认缓存特性/" data-id="cjeqll7pt0000dguvrtckk76v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -489,7 +591,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjei54ttv001jysuvqq4kjwvz" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/03/使用私有协议控制打开浏览器/" data-id="cjeqll7rj000fdguvwrqjk4og" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li></ul>
@@ -575,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjei54tt00003ysuv67jtrklg" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2018/01/02/MySQL函数小记GROUP_CONCAT/" data-id="cjeqll7r30004dguv98631rqg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -632,7 +734,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjei54ttv001kysuve72dare9" class="article-share-link">Share</a>
+      <a data-url="http://topsee.online/2015/05/30/好心办坏事小心隐式类型转换/" data-id="cjeqll7rj000gdguv4hix9t3g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类型转换/">类型转换</a></li></ul>
@@ -654,7 +756,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Report/">Report</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Report/SQL/">SQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/">ubuntu</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/磁盘/">磁盘</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/远程桌面/">远程桌面</a></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Report/">Report</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Report/SQL/">SQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/">ubuntu</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/JDK/">JDK</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/磁盘/">磁盘</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/远程桌面/">远程桌面</a></li></ul></li></ul>
     </div>
   </div>
 
@@ -664,7 +766,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSqlParser/">JSqlParser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLReport/">SQLReport</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启动/">启动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类型转换/">类型转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程桌面/">远程桌面</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSqlParser/">JSqlParser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLReport/">SQLReport</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip地址改写/">ip地址改写</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web编程-shell/">web编程,shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/启动/">启动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘扩充/">磁盘扩充</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类型转换/">类型转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/认证/">认证</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程桌面/">远程桌面</a></li></ul>
     </div>
   </div>
 
@@ -674,7 +776,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JSqlParser/" style="font-size: 10px;">JSqlParser</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQLReport/" style="font-size: 10px;">SQLReport</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/磁盘扩充/" style="font-size: 10px;">磁盘扩充</a> <a href="/tags/类型转换/" style="font-size: 10px;">类型转换</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a> <a href="/tags/远程桌面/" style="font-size: 10px;">远程桌面</a>
+      <a href="/tags/JDK/" style="font-size: 10px;">JDK</a> <a href="/tags/JSqlParser/" style="font-size: 10px;">JSqlParser</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQLReport/" style="font-size: 10px;">SQLReport</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip地址改写/" style="font-size: 10px;">ip地址改写</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/web编程-shell/" style="font-size: 10px;">web编程,shell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/磁盘扩充/" style="font-size: 10px;">磁盘扩充</a> <a href="/tags/类型转换/" style="font-size: 10px;">类型转换</a> <a href="/tags/认证/" style="font-size: 10px;">认证</a> <a href="/tags/远程桌面/" style="font-size: 10px;">远程桌面</a>
     </div>
   </div>
 
@@ -696,6 +798,10 @@
       <ul>
         
           <li>
+            <a href="/2018/03/14/ubuntu上JDK安装/">Ubuntu上JDK安装</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/07/Windows远程桌面访问Ubuntu16/">【译】Windows远程桌面访问Ubuntu 16.04</a>
           </li>
         
@@ -709,10 +815,6 @@
         
           <li>
             <a href="/2018/01/04/Linux上控制Tomcat定时启动关闭/">Linux上控制Tomcat定时启动关闭</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/04/不找网管通过iptables转换内外网地址2/">不找网管通过iptables转换内外网地址</a>
           </li>
         
       </ul>
