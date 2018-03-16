@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://topsee.online">
   <title>VirtualBox虚拟机Ubuntu添加磁盘 | 杂记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb  首先输入命令：n(添加新分区)之后回车：接着输入命令:p剩下步骤全按回车默认，最后输入命令w保存分区信息 创建分区为 /dev/sdb1">
+  <meta name="description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb">
 <meta name="keywords" content="ubuntu,磁盘扩充">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VirtualBox虚拟机Ubuntu添加磁盘">
 <meta property="og:url" content="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/index.html">
 <meta property="og:site_name" content="杂记">
-<meta property="og:description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb  首先输入命令：n(添加新分区)之后回车：接着输入命令:p剩下步骤全按回车默认，最后输入命令w保存分区信息 创建分区为 /dev/sdb1">
+<meta property="og:description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/adddisk.png">
 <meta property="og:image" content="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fdisk.png">
 <meta property="og:image" content="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fstab.png">
-<meta property="og:updated_time" content="2018-01-16T11:23:52.827Z">
+<meta property="og:updated_time" content="2018-03-16T07:25:50.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VirtualBox虚拟机Ubuntu添加磁盘">
-<meta name="twitter:description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb  首先输入命令：n(添加新分区)之后回车：接着输入命令:p剩下步骤全按回车默认，最后输入命令w保存分区信息 创建分区为 /dev/sdb1">
+<meta name="twitter:description" content="公司有一台跑在VirtualBox上的SVN服务器，时间有点久远用的还部署lvm，最近发现磁盘满了得，加啊！ 操作步骤添加虚拟磁盘：  创建磁盘首先 sudo fdisk -l  查看磁盘，获取到磁盘信息  开始分区 sudo fdisk /dev/sdb">
 <meta name="twitter:image" content="http://topsee.online/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/adddisk.png">
   
     <link rel="alternative" href="/atom.xml" title="杂记" type="application/atom+xml">
@@ -172,6 +172,7 @@
 <h4 id="创建磁盘"><a href="#创建磁盘" class="headerlink" title="创建磁盘"></a>创建磁盘</h4><p>首先 <code>sudo fdisk -l</code>  查看磁盘，获取到磁盘信息</p>
 <p><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fdisk.png" alt="fdisk"></p>
 <p>开始分区 <code>sudo fdisk /dev/sdb</code> </p>
+<a id="more"></a>
 <p>首先输入命令：n(添加新分区)之后回车：<br>接着输入命令:p<br>剩下步骤全按回车默认，<br>最后输入命令w保存分区信息</p>
 <p>创建分区为 <code>/dev/sdb1</code></p>
 <h4 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdb1</span><br></pre></td></tr></table></figure>
@@ -417,6 +418,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -437,27 +454,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -470,6 +467,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">

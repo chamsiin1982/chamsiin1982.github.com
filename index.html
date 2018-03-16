@@ -175,53 +175,9 @@
 <li>查看版本</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<h3 id="PPA仓库安装Oracle-JDK"><a href="#PPA仓库安装Oracle-JDK" class="headerlink" title="PPA仓库安装Oracle JDK"></a>PPA仓库安装Oracle JDK</h3><ol>
-<li>安装PPA</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br></pre></td></tr></table></figure>
-<ol>
-<li>添加源</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:webupd8team/java</span><br></pre></td></tr></table></figure>
-<ol>
-<li>更新软件源列表</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-<ol>
-<li>安装JDK</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：安装过程需要同意Oracle许可协议</p>
-<h3 id="手动安装JDK"><a href="#手动安装JDK" class="headerlink" title="手动安装JDK"></a>手动安装JDK</h3><ol>
-<li>oracle 官网下载JDK （jdk-8u161-linux-x64.tar.gz）</li>
-</ol>
-<ol>
-<li>解压到指定目录</li>
-</ol>
-<ul>
-<li>创建目录</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /usr/lib/jvm</span><br></pre></td></tr></table></figure>
-<ul>
-<li>解压到目录</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-8u161-linux-x64.tar.gz -C /usr/lib/jvm</span><br></pre></td></tr></table></figure>
-<ol>
-<li>配置环境变量 <code>~/.bashrc</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>set oracle jdk environment</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_161  ## 目录要对应jdk目录</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre  </span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib  </span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
-<ol>
-<li>环境变量生效</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<ol>
-<li>注册JDK</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives –install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_161/bin/java 300</span><br></pre></td></tr></table></figure>
-<h3 id="多版本JDK切换"><a href="#多版本JDK切换" class="headerlink" title="多版本JDK切换"></a>多版本JDK切换</h3><p>系统中有多个版本的JDK，可进行默认版本切换</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/03/14/ubuntu上JDK安装/chose_jdk.png" alt="选择JDK"></p>
-
+        
+          <a class="article-more-a" href="/2018/03/14/ubuntu上JDK安装/#more">more >></a>
+        
       
 
       
@@ -317,32 +273,9 @@
 <p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/launch-vino-config.jpg" alt="Desktop Sharing"></p>
 <p>2.）配置项包括</p>
 <p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/enable-vino-server.jpg" alt="远程访问选项"></p>
-<p>共享</p>
-<ul>
-<li>允许远程访问当前桌面</li>
-<li>运行远程访问者控制桌面（可选）</li>
-</ul>
-<p>安全</p>
-<ul>
-<li>远程访问需要确认</li>
-<li>需要独立密码远程访问</li>
-<li>通过公网访问，如果当前路由器开启了UPnP</li>
-</ul>
-<p>提醒显示远程连接图标</p>
-<ul>
-<li>一直显示</li>
-<li>有远程连接时</li>
-<li>从不显示</li>
-</ul>
-<p>3.）关闭加密</p>
-<p>直接使用TigerVNC Viewer连接服务时，会弹出不支持的安全类型，需关闭安全选项</p>
-<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/security-notsupported.jpg" alt="安全选项不支持"></p>
-<p>可通过 <strong>DCONF Editor</strong>配置“远程访问“  <strong>需加密</strong>选项 关闭</p>
-<p>路径<strong>org -&gt; gnome -&gt; desktop -&gt; remote-access</strong></p>
-<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/vino-disable-encryption.jpg" alt="关闭远程加密"></p>
-<p>客户端再次连接，可以访问</p>
-<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/remote-display.jpg" alt="远程访问"></p>
-
+        
+          <a class="article-more-a" href="/2018/03/07/Windows远程桌面访问Ubuntu16/#more">more >></a>
+        
       
 
       
@@ -455,14 +388,9 @@
 <ol>
 <li>​    利用 <a href="https://github.com/JSQLParser/JSqlParser" target="_blank" rel="noopener">JSQLParser</a> 解析SQL，根据配置附加执行内容,代码参考  <code>com.easytoolsoft.easyreport.domain.report.util.JsqlParserWhereConditionHelper</code></li>
 </ol>
-<p>最终代码：</p>
-<p><a href="https://github.com/chamsiin1982/EasyReport-2.0.16.1013_Beta" target="_blank" rel="noopener">https://github.com/chamsiin1982/EasyReport-2.0.16.1013_Beta</a></p>
-<p>后续可继续定制</p>
-<ul>
-<li>分页支持：配置可分页报表</li>
-<li>改造报表渲染方式：现报表组装都是在服务端，当报表数据量超过一定量之后拼接的表格、样式内容就太多，服务端直接返回JSON和报表配置使用JS客户端进行渲染</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2018/02/06/使用JSqlParser加强动态拼接SQL/#more">more >></a>
+        
       
 
       
@@ -565,17 +493,9 @@
 <h4 id="创建磁盘"><a href="#创建磁盘" class="headerlink" title="创建磁盘"></a>创建磁盘</h4><p>首先 <code>sudo fdisk -l</code>  查看磁盘，获取到磁盘信息</p>
 <p><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fdisk.png" alt="fdisk"></p>
 <p>开始分区 <code>sudo fdisk /dev/sdb</code> </p>
-<p>首先输入命令：n(添加新分区)之后回车：<br>接着输入命令:p<br>剩下步骤全按回车默认，<br>最后输入命令w保存分区信息</p>
-<p>创建分区为 <code>/dev/sdb1</code></p>
-<h4 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdb1</span><br></pre></td></tr></table></figure>
-<h4 id="系统内挂载"><a href="#系统内挂载" class="headerlink" title="系统内挂载"></a>系统内挂载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir svn</span><br><span class="line">sudo mount /dev/sdb1 /home/svn</span><br></pre></td></tr></table></figure>
-<h4 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h4><p>修改 <code>/etc/fstab</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sdb1 /home/svn ext4 defaults 0 1</span><br></pre></td></tr></table></figure>
-<p>添加后：<br><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fstab.png" alt="fstab"></p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>本来是想把磁盘挂在根目录的，发现根目录下挂载 原来的内容不能显示原目录下内容</p>
-<p><code>umount</code> 失败 ，只能通过 修改 <code>/etc/mtab</code> 文件处理</p>
-<p>[]: <a href="http://blog.csdn.net/ouyang_peng/article/details/53261599" target="_blank" rel="noopener">http://blog.csdn.net/ouyang_peng/article/details/53261599</a>    “virtualbox如何扩展Ubuntu虚拟磁盘”</p>
-
+        
+          <a class="article-more-a" href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/#more">more >></a>
+        
       
 
       
@@ -671,19 +591,9 @@
 <p>应用部署后发现一个诡异的现象，虽通过定时器控制了应用执行时间，但是因代码中使用<strong>异步</strong>的方式去执行任务，导致代码出现不可控行为：<code>推送消息会在凌晨发出</code></p>
 <p>定时调度配置：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- rss定时抓取 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"rssJSHBScheduleCronTrigger"</span> <span class="attr">class</span>=<span class="string">"org.springframework.scheduling.quartz.CronTriggerBean"</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jobDetail"</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"rssJSHBScheduleJobDetail"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"startDelay"</span> <span class="attr">value</span>=<span class="string">"15000"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 每天8:00到18:00每隔35分钟执行 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cronExpression"</span> <span class="attr">value</span>=<span class="string">"0 0/35 8-18 * * ? *"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>被调用的推送消息的内部类（伪码）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RssServiceJShbNotice</span> <span class="keyword">extends</span> <span class="title">Thread</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      ArticleMessage message = <span class="keyword">new</span> ArticleMessage();</span><br><span class="line">      </span><br><span class="line">      String title = <span class="string">"【新】通知公告"</span>;</span><br><span class="line">      String content = <span class="string">""</span>;</span><br><span class="line">      <span class="keyword">for</span> (String n_title : newNotice) &#123;</span><br><span class="line">        content = content + n_title + <span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">       Article article = <span class="keyword">new</span> Article(title, content, <span class="keyword">null</span>, <span class="keyword">null</span>, launchApp);</span><br><span class="line">	   message.addArticle(article);</span><br><span class="line">	   AppAccount account=AppAccount.loginByAccessToken(platform_ip, access_token);  			              account.sendOcuMessageToUsers(<span class="keyword">null</span>, message, ocu_id, ocu_secret);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">      log.error(<span class="string">"推送消息报错了==================================push"</span>);</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="修正办法"><a href="#修正办法" class="headerlink" title="修正办法"></a>修正办法</h4><ol>
-<li>把消息推送改为同步</li>
-<li>为避免程序被触发，直接关闭在早上7点再启动</li>
-</ol>
-<h4 id="Linux上定时关闭和启动Tomcat"><a href="#Linux上定时关闭和启动Tomcat" class="headerlink" title="Linux上定时关闭和启动Tomcat"></a>Linux上定时关闭和启动Tomcat</h4><p>启停脚本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>定义环境变量</span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-7-oracle</span><br><span class="line">export CLASSPATH=$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"><span class="meta">#</span> 获取tomcat进程ID</span><br><span class="line">TomcatID=$(ps -ef |grep tomcat |grep -w '/home/ubuntu/tomcat/apache-tomcat-7.0.73'|grep -v 'grep'|awk '&#123;print $2&#125;')</span><br><span class="line"><span class="meta">#</span> tomcat启动程序</span><br><span class="line">StartTomcat=/home/ubuntu/tomcat/apache-tomcat-7.0.73/bin/startup.sh</span><br><span class="line"></span><br><span class="line">echo "[info]脚本关闭tomcat...[$(date +'%F %H:%M:%S')]"</span><br><span class="line"><span class="meta">#</span>判断tomcat进程是否存在</span><br><span class="line">if [ $TomcatID ]</span><br><span class="line">then</span><br><span class="line">    echo "[info]当前tomcat进程ID为:$TomcatID"</span><br><span class="line">    echo "[info]杀掉tomcat进程"</span><br><span class="line">        kill -9 $TomcatID  # 杀掉原tomcat进程 </span><br><span class="line">        echo "[info]tomcat..杀掉.[$(date +'%F %H:%M:%S')]" &gt;&gt;  /home/ubuntu/tomcat/log.log   </span><br><span class="line">else</span><br><span class="line">    echo "[error]tomcat不存在!"</span><br><span class="line">    #rm -rf $TomcatCache</span><br><span class="line">    $StartTomcat &gt;&gt; /home/ubuntu/tomcat/log.log  </span><br><span class="line">fi</span><br><span class="line">echo "------------------------------"</span><br></pre></td></tr></table></figure>
-<p>赋予脚本执行权限：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +777 脚本名称</span><br></pre></td></tr></table></figure>
-<p>添加调度，cron脚本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> Edit this file to introduce tasks to be run by cron.</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> Each task to run has to be defined through a single line</span><br><span class="line"><span class="meta">#</span> indicating with different fields when the task will be run</span><br><span class="line"><span class="meta">#</span> and what command to run for the task</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> To define the time you can provide concrete values for</span><br><span class="line"><span class="meta">#</span> minute (m), hour (h), day of month (dom), month (mon),</span><br><span class="line"><span class="meta">#</span> and day of week (dow) or use '*' in these fields (for 'any').# </span><br><span class="line"><span class="meta">#</span> Notice that tasks will be started based on the cron's system</span><br><span class="line"><span class="meta">#</span> daemon's notion of time and timezones.</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> Output of the crontab jobs (including errors) is sent through</span><br><span class="line"><span class="meta">#</span> email to the user the crontab file belongs to (unless redirected).</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> For example, you can run a backup of all your user accounts</span><br><span class="line"><span class="meta">#</span> at 5 a.m every week with:</span><br><span class="line"><span class="meta">#</span> 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> For more information see the manual pages of crontab(5) and cron(8)</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> m h  dom mon dow   command</span><br><span class="line"><span class="meta">#</span>#7点启动</span><br><span class="line">0 7 * * * /home/ubuntu/tomcat/shell/tomcat_start.sh </span><br><span class="line"><span class="meta">#</span>#20点关闭</span><br><span class="line">0 20 * * * /home/ubuntu/tomcat/shell/tomcat_killed.sh</span><br></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2018/01/04/Linux上控制Tomcat定时启动关闭/#more">more >></a>
+        
       
 
       
@@ -780,27 +690,9 @@
 <li>单点认证服务器 <strong>内网地址</strong>  192.168.5.207 端口 8080<br>映射至公网    ***.94.78.76  端口  20008 </li>
 </ol>
 <h4 id="重定向URL"><a href="#重定向URL" class="headerlink" title="重定向URL"></a>重定向URL</h4><p>通过公网 访问服务：<code>http://***.94.78.93:10004/vocs</code> 会被单点认证服务器拦截，会拼接路径： <code>http:// ***.94.78.93:20008/xxxxx?app=vocs&amp;url=http:// ***.94.78.93:10004/vocs</code><br>（路径只为表现功能，不代表实际路径）</p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>到目前，一切看起来都很正常，也符合单点认证服务集成配置要求，但现实总会出现些奇怪的状况，比如：<strong>***.94.78.93</strong> , <strong>***.94.78.76</strong>  都是虚地址，更要命的是在 <strong>192.168.5.109</strong> 上居然<strong>ping</strong>不通***.94.78.76 ！好在能ping通 <strong>192.168.5.207</strong> 这个局域网地址</p>
-<h4 id="如何解决？"><a href="#如何解决？" class="headerlink" title="如何解决？"></a>如何解决？</h4><p>如果单点认证服务能够把认证配置和跳转配置分开，可配置成不同IP就能解决问题，或者网管能够帮调整下网络，让<strong>192.168.5.109</strong>能够访问到单点认证的公网IP也能解决问题. </p>
-<p>理想很丰满，现实却很骨干，协调后，得到的回馈是：单点认证服务暂时不支持分开配置，网管那边下班了（周五），怎么办？周一早上要给领导演示啊</p>
-<h4 id="第三条路"><a href="#第三条路" class="headerlink" title="第三条路"></a>第三条路</h4><p>抖了半天包袱，终于到正题了 m_m，默念10遍“<strong>ping公网不通，内网通</strong>”！</p>
-<ol>
-<li><p>要是使用的是域名就好了，配置下host就能蒙混过关，但哪来域名啊，到目前为止也没看过给什么应用分过域名，哪怕是三级域名！只能说这叫想得美……</p>
-</li>
-<li><p>能不能控制下路由或把访问的公网IP，改成内网IP！改IP，代理行吗？还得搞实验环境，代理后还得改写目标地址，改写目标地址，好像有那么点对的味道！</p>
-</li>
-</ol>
-<h4 id="定个小目标，就来改写目标地址试试"><a href="#定个小目标，就来改写目标地址试试" class="headerlink" title="定个小目标，就来改写目标地址试试"></a>定个小目标，就来改写目标地址试试</h4><p>以前用iptables实现过访问转发，iptables好像有改写目标地址，一通搜索，大部分都是说的是转发的,剩下的也描述的好晦涩，那些为了流量而复制黏贴内容的广告网站，你们有操守嘛！！！你们这些搬运工，把代码格式弄得那么差，也不标注源地址，更可恨的是某些搜索引擎，居然还让他们排前面，是不是自己不敢挂的广告就让他们来挂 ！！！</p>
-<p>只能恶补下基础，找iptables的完整教程，好在 <a href="http://www.imooc.com/learn/389" target="_blank" rel="noopener">慕课网</a>上有个不错的教程(实际因为前面的项目使用iptables配置转发的时候看过一遍，但是脑子里面一点印象都没有了，难道真的是老了嘛，记忆力差成这样了-_-! ),整个教程又搂了一遍,然后又开始试错n小时就过去了……</p>
-<h4 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h4><p>使用iptables的net地址转化，把 5.109对 <em>**.94.78.76的访问转换成 5.207的访问，回来的IP地址再改为 \</em>**.94.78.76</p>
-<p>最初是这样的：</p>
-<p>出去：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 20009 -d ***.94.78.76 -j DNAT --to 192.168.5.207:8080</span><br></pre></td></tr></table></figure>
-<p>回来：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -d 192.168.5.207 -p tcp --dport 8080 -j SNAT --to ***.94.78.76:20009</span><br></pre></td></tr></table></figure></p>
-<p>最后是这样的：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A OUTPUT  -p tcp --dport 20009 -d ***.94.78.76 -j DNAT --to 192.168.5.207:8080</span><br></pre></td></tr></table></figure></p>
-<p>表面上是被路由坑了，实际还是对iptables没搞清楚，虽然理论上效果是一致的</p>
-<h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><p>写这篇分享主要为<strong>iptables可用来改写目标地址</strong>，另外过程中也请网络运维的工程师帮看写出来的语句，请人帮忙一定要描述清问题，最好是请别人帮看代码写的对不对，而不是请人帮你写，因为不在一个频道上的对话，需要多大的面子啊</p>
-
+        
+          <a class="article-more-a" href="/2018/01/04/不找网管通过iptables转换内外网地址2/#more">more >></a>
+        
       
 
       
@@ -885,18 +777,9 @@
 <h4 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h4><p>项目里有发现“神奇”的代码，先不考虑代码逻辑以及实现方法是否合理，原来代码实现大致是这样：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## department 对象</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Department</span></span>&#123;</span><br><span class="line">   <span class="keyword">private</span>  Integer departmentId;</span><br><span class="line">   <span class="keyword">private</span>  String  departmentName;</span><br><span class="line">   <span class="keyword">private</span> Integer  pDepartmentId;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">private</span> List&lt;user&gt; departmentMember;</span><br><span class="line">   ## 省略get\set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## user 对象</span><br><span class="line">publci <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    ##所属部门编号</span><br><span class="line">    <span class="keyword">private</span> Integer departmentId;</span><br><span class="line">    </span><br><span class="line">    ## 省略get/set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">## 组织部门人员信息</span><br><span class="line"></span><br><span class="line">## 获取部门信息</span><br><span class="line">List&lt;Department&gt; departments= departmentService.getAllDepartments();</span><br><span class="line"></span><br><span class="line">## 获取人员信息</span><br><span class="line">List&lt;User&gt; users=userService.getAllUsers();</span><br><span class="line"></span><br><span class="line">## 迭代，拼接数据</span><br><span class="line"><span class="keyword">for</span>(Department dep:departments)&#123;</span><br><span class="line">    <span class="keyword">for</span>(User user:users)&#123;</span><br><span class="line">        <span class="comment">//坑点</span></span><br><span class="line">        <span class="keyword">if</span>(user.getDepartmentId() == dep.getDepartmentId())&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == dep.getDepartmentMember() )&#123;</span><br><span class="line">                dep.setDepartmentMember(<span class="keyword">new</span> ArrayList&lt;User&gt;());</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dep.getDepartmentMember().add(user);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>坑点，看到伪码大概都能知道了，就是<strong>Integer</strong>的比较，应该使用  <strong>equals()</strong> 或者 转换成 <strong>int</strong>进行比较，但这里隐藏了Java<br>的一个特性，使得 <strong>==</strong> 的运行符合预期，不正常变得正常了！！！但是“正常”还得结合特定的数据，造来：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `b_department` (</span><br><span class="line">  `department_id` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `department_name` varchar(50) DEFAULT NULL,</span><br><span class="line">  `p_department_id` int(11) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`department_id`)</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
-<p>如果部门数据比较少，数据库中的<code>department_id</code>刚好都小于127，程序运行的符合预期！！！ Why？！！</p>
-<p>在这里：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">为了节省内存，对于下列包装对象的两个实例，当它们的基本值相同时，他们总是 ‘相等’的  </span><br><span class="line">Boolean  </span><br><span class="line">Byte  </span><br><span class="line">Character, \u0000 - \u007f(7f是十进制的127)  </span><br><span class="line">Integer, -128 — 127</span><br></pre></td></tr></table></figure></p>
-<h4 id="延伸-：JVM通过参数调整包裹对象缓存大小"><a href="#延伸-：JVM通过参数调整包裹对象缓存大小" class="headerlink" title="延伸 ：JVM通过参数调整包裹对象缓存大小"></a>延伸 ：JVM通过参数调整包裹对象缓存大小</h4><p>使用Oracle/Sun JDK 6，在<strong>server</strong>模式下，使用-XX:AutoBoxCacheMax=NNN参数即可将Integer的自动缓存区间设置为<strong>[-128,NNN]</strong></p>
-<p><strong>注意：</strong> 区间的下界固定在-128不可配置，在<strong>client</strong>模式下该参数无效。 </p>
-<p>测试代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestIntegerCache</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        Integer a = <span class="number">1024</span>;  </span><br><span class="line">        Integer b = <span class="number">1024</span>;  </span><br><span class="line">        System.out.println(a == b);  </span><br><span class="line">          </span><br><span class="line">        Integer c = <span class="number">1025</span>;  </span><br><span class="line">        Integer d = <span class="number">1025</span>;  </span><br><span class="line">        System.out.println(c == d);  </span><br><span class="line">          </span><br><span class="line">        Integer e = <span class="number">20000</span>;  </span><br><span class="line">        Integer f = <span class="number">20000</span>;  </span><br><span class="line">        System.out.println(e == f);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">shell &gt;java TestIntegerCache  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -server TestIntegerCache  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -Djava.lang.Integer.IntegerCache.high=1024 TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -server -Djava.lang.Integer.IntegerCache.high=1024 TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -Djava.lang.Integer.IntegerCache.high=1025 TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">true  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -server -Djava.lang.Integer.IntegerCache.high=1025 TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">true  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -XX:AutoBoxCacheMax=1024 TestIntegerCache  </span><br><span class="line">Unrecognized VM option 'AutoBoxCacheMax=1024'  </span><br><span class="line">Could not create the Java virtual machine.  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -server -XX:AutoBoxCacheMax=1024 TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">false  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -server -XX:AutoBoxCacheMax=1025 TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">true  </span><br><span class="line">false  </span><br><span class="line">  </span><br><span class="line">shell &gt;java -server -XX:+AggressiveOpts TestIntegerCache  </span><br><span class="line">true  </span><br><span class="line">true  </span><br><span class="line">true</span><br></pre></td></tr></table></figure>
-<p>参考文档 ： <a href="http://blog.csdn.net/chengzhezhijian/article/details/9628251" target="_blank" rel="noopener"> Java Integer(-128~127)值的==和equals比较产生的思考</a></p>
-
+        
+          <a class="article-more-a" href="/2018/01/03/Java-Integer的默认缓存特性/#more">more >></a>
+        
       
 
       
@@ -974,24 +857,9 @@
 <p><img src="/2018/01/03/使用私有协议控制打开浏览器/desktop.png" alt="desktop"></p>
 <p>但因存在多开发厂商、集成项目建设时间差异等原因，出现浏览器差异化需求，如：行文办公，因使用插件需通过ActivitiX进行加载，必须使用IE；新上线的应用，因使用的框架比较新，对低版本IE不兼容，而需要使用Chrome或火狐这样的现代浏览器，林林总总。</p>
 <p>虽说只有考虑不到的设计没有碰不到的需求，客户说要支持，只能上啊，乙放得有乙方的承担（囧）。</p>
-<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>这种需要判断主机环境（只考虑面向<code>windows</code>用户，为什么？没有人在<code>Linux</code>或者<code>MAC</code>上用<code>ActivitiX</code>插件啊）是否安装浏览器还能调启浏览器的，第一想法肯定是浏览器插件，但每种浏览器都得开发插件，想想都快崩溃，有没有其他办法呢？</p>
-<p>某度完全不知道你搜索的是什么，还得靠<code>Google</code>了 （上不了？确定你是技术人员？）</p>
-<p>大概两种方法：</p>
-<ol>
-<li>使用JS控制打开某浏览器，再进行跳转（感觉心里没底，还得设置浏览器安全等级一堆，试了下放弃）</li>
-<li>使用协议扩展，定制注册表，控制打开浏览器</li>
-</ol>
-<p>说得有点多^_^ 还是show代码吧</p>
-<p>定制注册表，保存为<code>.reg</code>后缀的文件并执行：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2]</span><br><span class="line"><span class="string">"URL Protocol"</span>=<span class="string">"\"</span>\<span class="string">""</span></span><br><span class="line">@=<span class="string">"\"</span>URL:chrome2 Protocol\<span class="string">""</span></span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\DefaultIcon]</span><br><span class="line">@=<span class="string">"\"</span>chrome.exe,<span class="number">1</span>\<span class="string">""</span></span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\shell]</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\shell\open]</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\chrome2\shell\open\command]</span><br><span class="line">@=<span class="string">"cmd /k set myvar=%1 &amp; call set myvar=%%myvar:chrome2:=%% &amp; call start chrome  %%myvar%% &amp; exit /B"</span></span><br></pre></td></tr></table></figure>
-<p>大致就是做个钩子，在使用专用协议 <code>chrome2</code>时 使用chrome浏览器打开，使用<code>ie</code>协议的链接使用IE打开，类似代码就不贴了</p>
-<p>测试代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"ie:http://www.baidu.com"</span>&gt;</span>用IE打开<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"chrome2:http://www.baidu.com/"</span>&gt;</span>用chrome打开<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>点击用IE打开（弹出框有点丑）</p>
-<p><img src="/2018/01/03/使用私有协议控制打开浏览器/pop_window.png" alt="pop_window"></p>
-<h4 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h4><p>添加判断客户端是否已安装指定浏览器，让丑陋的弹窗口不丑陋</p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>[1]: <a href="https://stackoverflow.com/questions/35778489/need-vbscript-to-open-url-links-in-webpages-in-chrome-browser-not-ie" target="_blank" rel="noopener">https://stackoverflow.com/questions/35778489/need-vbscript-to-open-url-links-in-webpages-in-chrome-browser-not-ie</a>    通过脚本检测是否安装浏览器<br>[2]: <a href="https://stackoverflow.com/questions/40531374/open-internet-explorer-from-chrome-using-a-protocol-handler-ieurl" target="_blank" rel="noopener">https://stackoverflow.com/questions/40531374/open-internet-explorer-from-chrome-using-a-protocol-handler-ieurl</a>    使用私有协议从IE打开chrome</p>
-
+        
+          <a class="article-more-a" href="/2018/01/03/使用私有协议控制打开浏览器/#more">more >></a>
+        
       
 
       
@@ -1069,50 +937,9 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
-<h2 id="或者修改配置文件"><a href="#或者修改配置文件" class="headerlink" title="或者修改配置文件"></a>或者修改配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>表b_department结构</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>列名</th>
-<th style="text-align:left">字段类型</th>
-<th style="text-align:center">为主键</th>
-<th style="text-align:center">为外键</th>
-<th style="text-align:center">可为空</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>department_id</td>
-<td style="text-align:left">int(11)</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">否</td>
-</tr>
-<tr>
-<td>department_name</td>
-<td style="text-align:left">varchar(50)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">否</td>
-</tr>
-<tr>
-<td>p_department</td>
-<td style="text-align:left">int(11)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>SQL语句</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.department_id,a.department_name,a.p_department, </span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_id) <span class="keyword">as</span> child_ids,</span><br><span class="line">	<span class="keyword">group_concat</span>(b.department_name) <span class="keyword">as</span> child_names</span><br><span class="line"><span class="keyword">from</span> sys_department a</span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">join</span> sys_department b <span class="keyword">on</span> a.department_id=b.p_department</span><br><span class="line">  <span class="keyword">where</span> a.p_department=<span class="number">1</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a.department_id,a.department_name,a.p_department</span><br></pre></td></tr></table></figure>
-<p>执行结果 <img src="/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png" alt="image"></p>
-
+        
+          <a class="article-more-a" href="/2018/01/02/MySQL函数小记GROUP_CONCAT/#more">more >></a>
+        
       
 
       
@@ -1198,9 +1025,9 @@
 <p>这时，隐藏的一个陷阱就可能出现：数据库为了SQL正常工作，会使用隐式类型转换使得参数变成<code>bigint</code>类型，如果传递的参数不是整数会出现什么样的情况？</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">cast</span>(<span class="string">'查询参数'</span> <span class="keyword">as</span> <span class="keyword">UNSIGNED</span> ) ;</span><br></pre></td></tr></table></figure>
 <p>结果是：0</p>
-<p>如果恰好表里存在一条user<em>id为0的数据（真遇到了，不然也不会有这篇文章），就会被返回，接着就是让人的各种着急，连在<code>Google</code>上使用什么样的关键字来描述问题都非常困难^</em>^</p>
-<p>如果数据访问层能够做到对参数进行类型校验，肯定可以避免问题出现，但大多时候都是无心挖出来的坑，那真是满头的黑线啊！！！</p>
-
+        
+          <a class="article-more-a" href="/2015/05/30/好心办坏事小心隐式类型转换/#more">more >></a>
+        
       
 
       
@@ -1357,6 +1184,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -1377,27 +1220,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1410,6 +1233,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">

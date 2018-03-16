@@ -17,7 +17,7 @@
 <meta property="og:description" content="说明：这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在应用服务器配置单点服务信息、应用服务信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 20008，应用服务器地址 ***.94.78.93 端口10004  应用服务器 内网地址    192.168.5.109 服务部署 Tomcat 使用端口 8080映射公网">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://topsee.online/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png">
-<meta property="og:updated_time" content="2018-01-04T14:14:53.539Z">
+<meta property="og:updated_time" content="2018-03-16T07:26:15.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不找网管通过iptables转换内外网地址">
 <meta name="twitter:description" content="说明：这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在应用服务器配置单点服务信息、应用服务信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 20008，应用服务器地址 ***.94.78.93 端口10004  应用服务器 内网地址    192.168.5.109 服务部署 Tomcat 使用端口 8080映射公网">
@@ -171,6 +171,7 @@
 <li>单点认证服务器 <strong>内网地址</strong>  192.168.5.207 端口 8080<br>映射至公网    ***.94.78.76  端口  20008 </li>
 </ol>
 <h4 id="重定向URL"><a href="#重定向URL" class="headerlink" title="重定向URL"></a>重定向URL</h4><p>通过公网 访问服务：<code>http://***.94.78.93:10004/vocs</code> 会被单点认证服务器拦截，会拼接路径： <code>http:// ***.94.78.93:20008/xxxxx?app=vocs&amp;url=http:// ***.94.78.93:10004/vocs</code><br>（路径只为表现功能，不代表实际路径）</p>
+<a id="more"></a>
 <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>到目前，一切看起来都很正常，也符合单点认证服务集成配置要求，但现实总会出现些奇怪的状况，比如：<strong>***.94.78.93</strong> , <strong>***.94.78.76</strong>  都是虚地址，更要命的是在 <strong>192.168.5.109</strong> 上居然<strong>ping</strong>不通***.94.78.76 ！好在能ping通 <strong>192.168.5.207</strong> 这个局域网地址</p>
 <h4 id="如何解决？"><a href="#如何解决？" class="headerlink" title="如何解决？"></a>如何解决？</h4><p>如果单点认证服务能够把认证配置和跳转配置分开，可配置成不同IP就能解决问题，或者网管能够帮调整下网络，让<strong>192.168.5.109</strong>能够访问到单点认证的公网IP也能解决问题. </p>
 <p>理想很丰满，现实却很骨干，协调后，得到的回馈是：单点认证服务暂时不支持分开配置，网管那边下班了（周五），怎么办？周一早上要给领导演示啊</p>
@@ -415,6 +416,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -435,27 +452,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,6 +465,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">

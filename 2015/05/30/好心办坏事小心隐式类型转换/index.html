@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="杂记">
 <meta property="og:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-05T05:55:52.051Z">
+<meta property="og:updated_time" content="2018-03-16T07:26:37.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="好心办坏事小心隐式类型转换">
 <meta name="twitter:description" content="数据库为了保证SQL能够正常执行，总会提供一些友好性来满足那些看起来对的SQL正常执行，如隐式类型转换的使用，万字不如code，来看个具体的问题 创建表 123456create table  CONVERT_SHOW   (    USER_ID              bigint(8),    NAME                 varchar(8),    OP_TIME">
@@ -174,6 +174,7 @@
 <p>这时，隐藏的一个陷阱就可能出现：数据库为了SQL正常工作，会使用隐式类型转换使得参数变成<code>bigint</code>类型，如果传递的参数不是整数会出现什么样的情况？</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">cast</span>(<span class="string">'查询参数'</span> <span class="keyword">as</span> <span class="keyword">UNSIGNED</span> ) ;</span><br></pre></td></tr></table></figure>
 <p>结果是：0</p>
+<a id="more"></a>
 <p>如果恰好表里存在一条user<em>id为0的数据（真遇到了，不然也不会有这篇文章），就会被返回，接着就是让人的各种着急，连在<code>Google</code>上使用什么样的关键字来描述问题都非常困难^</em>^</p>
 <p>如果数据访问层能够做到对参数进行类型校验，肯定可以避免问题出现，但大多时候都是无心挖出来的坑，那真是满头的黑线啊！！！</p>
 
@@ -402,6 +403,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -422,27 +439,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,6 +452,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">

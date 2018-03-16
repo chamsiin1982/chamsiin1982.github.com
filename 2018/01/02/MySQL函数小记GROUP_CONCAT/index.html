@@ -17,7 +17,7 @@
 <meta property="og:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://topsee.online/2018/01/02/MySQL函数小记GROUP_CONCAT/group_concat_show.png">
-<meta property="og:updated_time" content="2018-01-04T14:14:53.539Z">
+<meta property="og:updated_time" content="2018-03-16T07:25:29.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL函数小记GROUP_CONCAT">
 <meta name="twitter:description" content="在使用父子表查询时，如何展示子表数据项，MySQL没有Oracle的start with 函数，但也提供了系统函数可以达到类似效果 123GROUP_CONCAT ([DISTINCT] expr [,expr ...]  [ORDER BY &amp;#123;unsigned_integer | col_name | expr&amp;#125; [ASC | DESC] [,col_name ...]]">
@@ -168,6 +168,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT ([DISTINCT] expr [,expr ...]</span><br><span class="line">  [ORDER BY &#123;unsigned_integer | col_name | expr&#125; [ASC | DESC] [,col_name ...]] [SEPARATOR str_val]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：函数有默认长度限制，默认1024，如出现诡异的现象，可能是超长了记得设置： group_concat_max_len ，方法</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">SESSION</span> | <span class="keyword">GLOBAL</span>] group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="或者修改配置文件"><a href="#或者修改配置文件" class="headerlink" title="或者修改配置文件"></a>或者修改配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat_max_len = 需要的大小;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>表b_department结构</p>
@@ -427,6 +428,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -447,27 +464,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,6 +477,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">
