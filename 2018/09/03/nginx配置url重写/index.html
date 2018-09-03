@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://topsee.online">
   <title>【转】nginx配置url重写 | 杂记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="rewrite 语法 简单例子 last和break的区别     if判断 语法 内置的全局变量 例子   location 语法 优先级 例子 - 假地址掩饰真地址 link    url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静态、301重定向、浏览器定向等 rewrite语法在配置文件的server块中写，如： 1server &amp;">
+  <meta name="description" content="原文地址：https://xuexb.com/post/nginx-url-rewrite.html  rewrite 语法 简单例子 last和break的区别     if判断 语法 内置的全局变量 例子   location 语法 优先级 例子 - 假地址掩饰真地址 link     url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静">
 <meta name="keywords" content="nginx,url rewrite">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【转】nginx配置url重写">
 <meta property="og:url" content="https://topsee.online/2018/09/03/nginx配置url重写/index.html">
 <meta property="og:site_name" content="杂记">
-<meta property="og:description" content="rewrite 语法 简单例子 last和break的区别     if判断 语法 内置的全局变量 例子   location 语法 优先级 例子 - 假地址掩饰真地址 link    url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静态、301重定向、浏览器定向等 rewrite语法在配置文件的server块中写，如： 1server &amp;">
+<meta property="og:description" content="原文地址：https://xuexb.com/post/nginx-url-rewrite.html  rewrite 语法 简单例子 last和break的区别     if判断 语法 内置的全局变量 例子   location 语法 优先级 例子 - 假地址掩饰真地址 link     url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-03T05:39:22.703Z">
+<meta property="og:updated_time" content="2018-09-03T06:43:10.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【转】nginx配置url重写">
-<meta name="twitter:description" content="rewrite 语法 简单例子 last和break的区别     if判断 语法 内置的全局变量 例子   location 语法 优先级 例子 - 假地址掩饰真地址 link    url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静态、301重定向、浏览器定向等 rewrite语法在配置文件的server块中写，如： 1server &amp;">
+<meta name="twitter:description" content="原文地址：https://xuexb.com/post/nginx-url-rewrite.html  rewrite 语法 简单例子 last和break的区别     if判断 语法 内置的全局变量 例子   location 语法 优先级 例子 - 假地址掩饰真地址 link     url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静">
   
     <link rel="alternative" href="/atom.xml" title="杂记" type="application/atom+xml">
   
@@ -161,32 +161,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
+        <blockquote>
+<p>原文地址：<a href="https://xuexb.com/post/nginx-url-rewrite.html" target="_blank" rel="noopener">https://xuexb.com/post/nginx-url-rewrite.html</a></p>
+<ul>
 <li>rewrite<ul>
-<li><a href="nginx配置url重写.html#toc-f2b">语法</a></li>
+<li>语法</li>
 <li>简单例子<ul>
-<li><a href="nginx配置url重写.html#toc-b30">last和break的区别</a></li>
+<li>last和break的区别</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>if判断<ul>
-<li><a href="nginx配置url重写.html#toc-f2b">语法</a></li>
-<li><a href="nginx配置url重写.html#toc-9be">内置的全局变量</a></li>
-<li><a href="nginx配置url重写.html#toc-8cb">例子</a></li>
+<li>语法</li>
+<li>内置的全局变量</li>
+<li>例子</li>
 </ul>
 </li>
 <li>location<ul>
-<li><a href="nginx配置url重写.html#toc-f2b">语法</a></li>
-<li><a href="nginx配置url重写.html#toc-ee8">优先级</a></li>
-<li><a href="nginx配置url重写.html#toc-a46">例子 - 假地址掩饰真地址</a></li>
-<li><a href="nginx配置url重写.html#link">link</a></li>
+<li>语法</li>
+<li>优先级</li>
+<li>例子 - 假地址掩饰真地址</li>
+<li>link</li>
 </ul>
 </li>
 </ul>
+</blockquote>
 <p>url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静态、301重定向、浏览器定向等</p>
-<h2 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite"></a>rewrite</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>在配置文件的<code>server</code>块中写，如：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;    <span class="attribute">rewrite</span> 规则 定向路径 重写类型; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite"></a>rewrite</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>在配置文件的<code>server</code>块中写，如：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;    <span class="attribute">rewrite</span> 规则 定向路径 重写类型; &#125;</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>规则：可以是字符串或者正则来表示想匹配的目标url</li>
 <li>定向路径：表示匹配到规则后要定向的路径，如果规则里有正则，则可以使用<code>$index</code>来表示正则里的捕获分组</li>
@@ -199,6 +201,7 @@
 </li>
 </ul>
 <h3 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;    </span><br><span class="line">    <span class="comment"># 访问 /last.html 的时候，页面内容重写到 /index.html 中    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /last.html /index.html <span class="literal">last</span>;    </span><br><span class="line">    <span class="comment"># 访问 /break.html 的时候，页面内容重写到 /index.html 中，并停止后续的匹配    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /break.html /index.html <span class="literal">break</span>;    </span><br><span class="line">    <span class="comment"># 访问 /redirect.html 的时候，页面直接302定向到 /index.html中    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /redirect.html /index.html <span class="literal">redirect</span>;    </span><br><span class="line">    <span class="comment"># 访问 /permanent.html 的时候，页面直接301定向到 /index.html中    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /permanent.html /index.html <span class="literal">permanent</span>;    </span><br><span class="line">    <span class="comment"># 把 /html/*.html =&gt; /post/*.html ，301定向    </span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/html/(.+?).html$</span> /post/<span class="variable">$1</span>.html <span class="literal">permanent</span>;    </span><br><span class="line">    <span class="comment"># 把 /search/key =&gt; /search.html?keyword=key    </span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/search\/([^\/]+?)(\/|$)</span> /search.html?keyword=<span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h4 id="last和break的区别"><a href="#last和break的区别" class="headerlink" title="last和break的区别"></a>last和break的区别</h4><p>因为301和302不能简单的只返回状态码，还必须有重定向的URL，这就是return指令无法返回301,302的原因了。这里 last 和 break 区别有点难以理解：</p>
 <ul>
 <li>last一般写在server和if中，而break一般使用在location中</li>
@@ -257,9 +260,6 @@
 <li><a href="http://www.linuxeye.com/configuration/2657.html" target="_blank" rel="noopener">Nginx location在配置中的优先级</a></li>
 <li><a href="http://github.com/xuexb/learn-nginx" target="_blank" rel="noopener">学习安装配置nginx - @xuexb/learn-nginx</a></li>
 </ul>
-<blockquote>
-<p>原文地址：<a href="https://xuexb.com/post/nginx-url-rewrite.html" target="_blank" rel="noopener">https://xuexb.com/post/nginx-url-rewrite.html</a></p>
-</blockquote>
 
       
 
@@ -482,6 +482,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">grant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转义</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kettle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">table output</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -502,18 +522,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">grant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转义</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
@@ -526,11 +534,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kettle</a>
+                <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">table output</a>
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iptables</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">认证</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">aptget</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,46 +598,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iptables</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">认证</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">aptget</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">webservice</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">carte</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
@@ -610,11 +610,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
+                <a href="javascript:void(0)" class="js-tag color1">webservice</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
+                <a href="javascript:void(0)" class="js-tag color1">carte</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,11 +622,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+                <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
+                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
               </li>
             
             <div class="clearfix"></div>
