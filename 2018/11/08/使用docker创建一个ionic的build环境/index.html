@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://topsee.online">
   <title>使用docker创建一个ionic的build环境 | 杂记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在使用ionic做web版本发布时，发现使用生产模式(ionic build --prod)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发   使用ubuntu 16.04 作为基础镜像  编写Dockerfile123456789101112131415161718192021222324252627282930">
-<meta name="keywords" content="ionic,docker">
+  <meta name="description" content="在使用ionic做web版本发布时，发现使用生产模式(ionic build --prod)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发，什么？撸起袖子 干！   使用ubuntu 16.04 作为基础镜像  编写Dockerfile1234567891011121314151617181920212223242">
+<meta name="keywords" content="docker,ionic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用docker创建一个ionic的build环境">
 <meta property="og:url" content="https://topsee.online/2018/11/08/使用docker创建一个ionic的build环境/index.html">
 <meta property="og:site_name" content="杂记">
-<meta property="og:description" content="在使用ionic做web版本发布时，发现使用生产模式(ionic build --prod)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发   使用ubuntu 16.04 作为基础镜像  编写Dockerfile123456789101112131415161718192021222324252627282930">
+<meta property="og:description" content="在使用ionic做web版本发布时，发现使用生产模式(ionic build --prod)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发，什么？撸起袖子 干！   使用ubuntu 16.04 作为基础镜像  编写Dockerfile1234567891011121314151617181920212223242">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-08T06:27:28.226Z">
+<meta property="og:updated_time" content="2018-11-09T01:29:21.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用docker创建一个ionic的build环境">
-<meta name="twitter:description" content="在使用ionic做web版本发布时，发现使用生产模式(ionic build --prod)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发   使用ubuntu 16.04 作为基础镜像  编写Dockerfile123456789101112131415161718192021222324252627282930">
+<meta name="twitter:description" content="在使用ionic做web版本发布时，发现使用生产模式(ionic build --prod)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发，什么？撸起袖子 干！   使用ubuntu 16.04 作为基础镜像  编写Dockerfile1234567891011121314151617181920212223242">
   
     <link rel="alternative" href="/atom.xml" title="杂记" type="application/atom+xml">
   
@@ -162,7 +162,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>在使用ionic做web版本发布时，发现使用生产模式(<code>ionic build --prod</code>)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发</p>
+<p>在使用ionic做web版本发布时，发现使用生产模式(<code>ionic build --prod</code>)进行打包，会出现一些js丢失导致最终项目不能执行（可能是npm版本引起），本着遇到问题要解决（瞎折腾），顺便统一编译环境方便分发，什么？撸起袖子 干！</p>
 <blockquote>
 <p> 使用ubuntu 16.04 作为基础镜像</p>
 </blockquote>
@@ -196,11 +196,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ionic</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ionic</a>
         		</li>
       		
 		</ul>
@@ -280,6 +280,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/11/11/使用docker-compose安装Kong及相关环境/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          使用docker-compose安装Kong及相关环境
+        
+      </div>
+    </a>
   
   
     <a href="/2018/09/03/nginx配置url重写/" id="article-nav-older" class="article-nav-link-wrap">
@@ -413,6 +422,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">grant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转义</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cron</a>
               </li>
              
@@ -433,55 +454,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">grant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转义</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">aptget</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -497,23 +474,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ionic</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iptables</a>
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">认证</a>
+                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">aptget</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,6 +515,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SQLReport</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iptables</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">认证</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ip地址改写</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,7 +550,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">docker-compose</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kong</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,7 +566,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ionic</a>
               </li>
             
             <div class="clearfix"></div>
