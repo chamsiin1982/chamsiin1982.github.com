@@ -141,6 +141,224 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MySQL中Grant赋权时特殊字符的转义" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/17/MySQL中Grant赋权时特殊字符的转义/">【转】MySQL中Grant赋权时特殊字符的转义</a>
+    </h1>
+  
+
+        
+        <a href="/2014/06/17/MySQL中Grant赋权时特殊字符的转义/" class="archive-article-date">
+  	<time datetime="2014-06-17T15:57:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>在使用<strong>Grant</strong>进行命令行赋权时，碰到转义符问题，发现解决文章做个转载</p>
+<p>原文地址：<a href="http://blog.useasp.net/archive/2013/05/21/MySQL-special-character-escape-method-when-grant-privilages-to-user.aspx" target="_blank" rel="noopener">http://blog.useasp.net/archive/2013/05/21/MySQL-special-character-escape-method-when-grant-privilages-to-user.aspx</a></p>
+<p>在<a href="http://blog.useasp.net/tags/MySQL" target="_blank" rel="noopener">MySQL</a>中使用了下划线的数据库名，今天在GRANT的时候，死活无法为用户赋予权限，一直报错。查看了官方的文档，文档中说：如果使用下划线的数据库在使用GRANT的时候，需要对数据库的下划线进行<a href="http://blog.useasp.net/tags/%E5%AD%97%E7%AC%A6%E8%BD%AC%E4%B9%89" target="_blank" rel="noopener">转义</a></p>
+<p>官方文档的说明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The “_” and “%” wildcards are permitted when specifying database names in GRANT statements that grant privileges at the global or database levels. This means, for example, that if you want to use a “_” character as part of a database name, you should specify it as “\_” in the GRANT statement, to prevent the user from being able to access additional databases matching the wildcard pattern; for example,GRANT ... ON `foo\_bar`.* TO ....</span><br></pre></td></tr></table></figure>
+<p><strong>GRANT</strong>语句用于在全局层级或数据库层级赋予权限。当在<a href="http://blog.useasp.net/tags/GRANT" target="_blank" rel="noopener">GRANT语句</a>中指定数据库名称时，允许使用‘<em>’和‘%’通配符。这意味着，如果您想要使用‘</em>’字符作为一个数据库名称的一部分，您应该在GRANT语句中指定它为‘_’，以防止用户可以访问其它符合此通配符格式的数据库；例如，GRANT … ON <code>foo\_bar</code>.* TO …。</p>
+<p>说明非常明确，就是在碰到下划线和百分号的时候，为了防止GRANT的时候权限漂移，需要明确的对这两个通配符进行转义，转义符为\，因此有了如下的语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON &apos;db\_test&apos;.* TO &apos;test_user&apos;;</span><br></pre></td></tr></table></figure>
+<p>恩，看上去是如此的完美，但，非常遗憾的是，MySQL接受到这个语句直接报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos;db\_test&apos;.* TO &apos;test_user&apos;&apos; at line 1</span><br></pre></td></tr></table></figure>
+<p>经过多次测试，终于发现这个语法应该变成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON `db\_test`.* TO &apos;test_user&apos;;</span><br></pre></td></tr></table></figure>
+<p>发现不同了吗？至少我当时没有发现，经过尝试才发现，转义的时候，不仅原有的通配符需要反斜杆[]进行转义，就连包含转义字串的引号也要变成<strong>反勾号</strong>！反勾号是啥？就是标准键盘中主键盘数字键1前面的那个键（也就是ESC下面的那个键）。</p>
+<blockquote>
+<p>经过修正后的SQL语句非常顺利的执行了，类似的情况，在GRANT中需要注意的是TO后面的User，平时User字串是可以不用单引号的，但如果User字串中包含了中划线（-）的时候，或者含有通配符（%）的时候，则必须要有引号包含。</p>
+</blockquote>
+<p><strong>注</strong>，jdbc的url 中同样需要转义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url=jdbc:mysql:<span class="comment">//127.0.0.1:3306/db\_dev?useUnicode=true&amp;characterEncoding=utf-8</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">grant</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转义</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/mysql//" class="article-tag-list-link color1">mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/06/17/MySQL中Grant赋权时特殊字符的转义/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-socke-io的10K-连接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/04/12/socke-io的10K-连接/">socke.io的10K+连接</a>
+    </h1>
+  
+
+        
+        <a href="/2014/04/12/socke-io的10K-连接/" class="archive-article-date">
+  	<time datetime="2014-04-11T16:00:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>最近基于<a href="http://socket.io/" target="_blank" rel="noopener">socket.io</a>写了个消息服务，使用<a href="https://github.com/M6Web/websocket-bench" target="_blank" rel="noopener">websocket-bench </a>进行压力测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">websocket-bench -a 5000 -c 500 http://ip:9080</span><br></pre></td></tr></table></figure>
+<p>发现只要连接超过1000多点，就会失败：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Launch bench with 5000 total connection, 500 concurent connection  </span><br><span class="line">0 message(s) send by client  </span><br><span class="line">1 worker(s)  </span><br><span class="line">WS server : socket.io  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span>### steps report ####  </span><br><span class="line">┌────┬────── ┬───  ┬───────┐  </span><br><span class="line">│ Number │ Connections │ Errors │ Duration(ms) │  </span><br><span class="line">├────┼────── ┼────┼───────┤  </span><br><span class="line">│ 500    │ 500         │ 0      │ 1787         │  </span><br><span class="line">├────┼── ────┼────┼───────┤  </span><br><span class="line">│ 1000   │ 500         │ 0      │ 2609         │  </span><br><span class="line">├────┼── ────┼────┼───────┤  </span><br><span class="line">│ 1500   │ 0           │ 500    │ 2610         │  </span><br><span class="line">├────┼───── ─┼────┼───────┤  </span><br><span class="line">│ 2000   │ 13          │ 487    │ 1609         │  </span><br><span class="line">├────┼ ──────┼────┼───────┤  </span><br><span class="line">│ 2500   │ 0           │ 500    │ 1114         │  </span><br><span class="line">├────┼──── ──┼────┼───────┤  </span><br><span class="line">│ 3000   │ 0           │ 500    │ 1135         │  </span><br><span class="line">├────┼─ ─────┼────┼───────┤  </span><br><span class="line">│ 3500   │ 0           │ 500    │ 634          │  </span><br><span class="line">├────┼──── ──┼────┼───────┤  </span><br><span class="line">│ 4000   │ 0           │ 500    │ 597          │  </span><br><span class="line">├────┼── ────┼────┼───────┤  </span><br><span class="line">│ 4500   │ 0           │ 500    │ 1119         │  </span><br><span class="line">├────┼─── ───┼────┼───────┤  </span><br><span class="line">│ 5000   │ 0           │ 500    │ 618          │  </span><br><span class="line">└────┴──── ──┴────┴───────┘  </span><br><span class="line"><span class="meta">#</span>### total report ####  </span><br><span class="line">┌────┬────── ┬────┬───────┬───────┬───────┐  </span><br><span class="line">│ Number │ Connections │ Errors │ Message Send │ Message Fail │ Duration(ms) │  </span><br><span class="line">├────┼──── ──┼────┼───────┼───────┼───────┤  </span><br><span class="line">│ 5000   │ 1013        │ 3987   │ 0            │ 0            │ 9627         │  </span><br><span class="line">└────┴─── ───┴────┴───────┴───────┴───────┘</span><br></pre></td></tr></table></figure>
+<p>为什么会是<strong>1000</strong>多点这个数？websocket-bench 的README.md文档也特别提醒：</p>
+<blockquote>
+<p>Tip: You may find it useful to increase the maximum number of open file descriptors on your system during testing:</p>
+<p><strong>ulimit -n 60000</strong></p>
+</blockquote>
+<p>ulimit 有什么特殊作用？网上搜到这篇文章<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-ulimit/" target="_blank" rel="noopener"> 通过ulimit改善系统性能</a> ，原来是系统默认的文件打开数影响了连接数 ，通过命令 <strong>ulimit -a</strong>可以看到：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">core file size             (blocks, -c) 0  </span><br><span class="line">data seg size              (kbytes, -d) unlimited  </span><br><span class="line">scheduling priority             (-e) 0  </span><br><span class="line">file size                    (blocks, -f) unlimited  </span><br><span class="line">pending signals                  (-i) 31107  </span><br><span class="line">max locked memory          (kbytes, -l) 64  </span><br><span class="line">max memory size            (kbytes, -m) unlimited  </span><br><span class="line">open files                   (-n) 1024  </span><br><span class="line">pipe size                    (512 bytes, -p) 8  </span><br><span class="line">POSIX message queues         (bytes, -q) 819200  </span><br><span class="line">real-time priority                  (-r) 0  </span><br><span class="line">stack size                   (kbytes, -s) 8192  </span><br><span class="line">cpu time                     (seconds, -t) unlimited  </span><br><span class="line">max user processes              (-u) 31107  </span><br><span class="line">virtual memory               (kbytes, -v) unlimited  </span><br><span class="line">file locks                     (-x) unlimited</span><br></pre></td></tr></table></figure>
+<p>open files 为 1024 大概明白为什么socket连接只能有1000多点，使用 ulimit -n 60000来调整可打开文件数，再进行测试，连接数果然就正常了</p>
+<blockquote>
+<p><strong>题外话</strong> socket长连接保持着“文件”（Linux上一切都可以看成是文件）被打开，所以1024的文件连接数很快被耗尽，虽然websocket-bench 文档中也提到ulimit -n 参数调整，但是对操作系统性能类的参数了解很少，没明白什么意思，就无视了，等发现问题的时候，猜可能是该参数影响了性能，才去查资料，所以说专业的事情还真得专业的人来解决，主机工程师或者性能测试人员对这类的参数也许就比较熟悉，知道该类参数的调整，程序员碰到可能真得一头雾水，现在明白为什么高校的计算机专业需要开设操作系统的课程了，这才是基础，虽然学的也是一头雾水^_^</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">10K</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件句柄</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ulimit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/node-js//" class="article-tag-list-link color3">node.js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/04/12/socke-io的10K-连接/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-使用SSH端口转发访问内网" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -344,6 +562,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">kettle</a>
               </li>
              
@@ -357,14 +583,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">grant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转义</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -388,11 +606,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">grant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转义</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">folding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -405,22 +655,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ulimit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,6 +730,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ionic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
               </li>
              
@@ -505,10 +743,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ionic</a>
               </li>
             
             <div class="clearfix"></div>

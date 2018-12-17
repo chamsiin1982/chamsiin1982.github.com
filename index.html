@@ -141,6 +141,259 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-eclipse注释默认折叠设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/17/eclipse注释默认折叠设置/">eclipse代码注释默认折叠设置</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/17/eclipse注释默认折叠设置/" class="archive-article-date">
+  	<time datetime="2018-12-17T02:20:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码注释的默认折叠"><a href="#代码注释的默认折叠" class="headerlink" title="代码注释的默认折叠"></a>代码注释的默认折叠</h2><p>项目在配合使用 <a href="http://apidocjs.com" target="_blank" rel="noopener">APIDoc</a> 来进行服务api文档的生成，以官方模板进行注释，发现注释量一下子就上来（原来不够规范），问题来了，当打开一个接口实现就发现整个都是注释，嗯 这时需要收起注释</p>
+<p>Eclipse已提供这样的功能，设置一下就可以：</p>
+<p>Window -&gt; Preferences -&gt; Java -&gt; Editor -&gt;Folding </p>
+<p><img src="/2018/12/17/eclipse注释默认折叠设置/5C1545014566553.png" alt="1545014566553"></p>
+<p>IDEA应该有同样的功能，只要搜索查一下就可以。</p>
+<blockquote>
+<p>各种工具实现的细节功能很多，比想象的要强大，很多时候因为使用场景很多功能没注意到</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">folding</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/eclipse//" class="article-tag-list-link color3">eclipse</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/17/eclipse注释默认折叠设置/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-GitLab分支管理说明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/17/GitLab分支管理说明/">GitLab分支管理说明</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/17/GitLab分支管理说明/" class="archive-article-date">
+  	<time datetime="2018-12-17T02:07:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="GitLab分支管理说明"><a href="#GitLab分支管理说明" class="headerlink" title="GitLab分支管理说明"></a>GitLab分支管理说明</h2><h3 id="仓库分支说明"><a href="#仓库分支说明" class="headerlink" title="仓库分支说明"></a>仓库分支说明</h3><ul>
+<li><p>主分支 <strong>master</strong>  </p>
+<p> 所有用户可见的正式版本，都从master发布。主分支作为稳定的唯一代码库，不做任何开发使用。</p>
+<blockquote>
+<p>拉取源：无需。</p>
+<p>合并目标：无需。</p>
+<p>修改：不允许。</p>
+<p>生命期：持续。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>开发分支 <strong>develop</strong></p>
+<p> 分支维护了当前开发中代码的主线，始终保持代码新于master。持续集成、自动化测试等都是基于这个分支。由于版本迭代较快，开发分支只提供拉取，不进行实际开发。</p>
+<blockquote>
+<p> 拉取源：初始自master。</p>
+<p> 合并目标：master。</p>
+<p> 修改：允许</p>
+<p> 生命期：持续。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>预发布（功能测试）分支  <strong>pre-release-version</strong></p>
+<p> 用于发布准备版本，从master拉取，测试完成转为<strong>release</strong>。如果测试失败，发布相关<strong>need-fix-bug</strong>，废弃该分支。</p>
+<blockquote>
+<p>拉取源：master。</p>
+<p>合并目标：无需。</p>
+<p> 修改：不允许。</p>
+<p> 生命期：测试通过转发布，失败删除。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>发布分支 <strong>release-version-yyyymmdd</strong></p>
+<p> 用于与线上发布保持一致，用于线上BUG类问题快速定位；BUG修正需从develop拉取，修正后合并至develop和master。</p>
+<blockquote>
+<p> 拉取源：master。</p>
+<p> 合并目标：无。</p>
+<p>  修改：不允许。</p>
+<p>  生命期：持续。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="开发人员分支说明"><a href="#开发人员分支说明" class="headerlink" title="开发人员分支说明"></a>开发人员分支说明</h3><ul>
+<li><p>镜像分支 develop ：</p>
+<p> pull自仓库develop分支，用于创建本地开发分支、合并本地开发分支、push至远程仓库</p>
+<blockquote>
+<p>拉取源：远程仓库develop。</p>
+<p>合并目标：远程仓库develop。</p>
+<p> 修改：允许。</p>
+<p>生命期：持续。</p>
+</blockquote>
+</li>
+<li><p>临时/特性/bug修正 分支 </p>
+<p> 从本地镜像develop拉取。开发功能特性/bugfix后，merge回本地develop，再推至远程仓库。</p>
+<blockquote>
+<p> 拉取源：develop。</p>
+<p>  合并目标：develop。</p>
+<p>  修改：允许。</p>
+<p>  生命期：合并后删除。</p>
+</blockquote>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/12/17/GitLab分支管理说明/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">gitlab</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/17/GitLab分支管理说明/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-使用docker-compose安装Kong及相关环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -995,227 +1248,6 @@
 
 
   
-    <article id="post-Windows远程桌面访问Ubuntu16" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/07/Windows远程桌面访问Ubuntu16/">【译】Windows远程桌面访问Ubuntu 16.04</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/07/Windows远程桌面访问Ubuntu16/" class="archive-article-date">
-  	<time datetime="2018-03-07T05:52:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>以前连接Ubuntu远程桌面都是使用的xrdp，要在Ubuntu上安装一堆软件，实际Ubuntu 16.04 提供了远程连接 <strong>Desktop Shareing</strong> 结合 <strong>VNC</strong>就能解决</p>
-<p>原贴：<a href="http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/" target="_blank" rel="noopener">http://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/</a></p>
-<p>主要介绍通过启用/配置 VNC服务，使得Ubuntu 16.04 支持远程桌面访问，具体步骤</p>
-<p>1.) Ubuntu桌面版提供了 VNC 服务，可通过 <strong>Desktop Sharing</strong>来配置</p>
-<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/launch-vino-config.jpg" alt="Desktop Sharing"></p>
-<p>2.）配置项包括</p>
-<p><img src="/2018/03/07/Windows远程桌面访问Ubuntu16/enable-vino-server.jpg" alt="远程访问选项"></p>
-        
-          <a class="article-more-a" href="/2018/03/07/Windows远程桌面访问Ubuntu16/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">远程桌面</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ubuntu//" class="article-tag-list-link color2">ubuntu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ubuntu/远程桌面//" class="article-tag-list-link color5">远程桌面</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/07/Windows远程桌面访问Ubuntu16/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-使用JSqlParser加强动态拼接SQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/06/使用JSqlParser加强动态拼接SQL/">使用JSqlParser加强动态拼接SQL</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/06/使用JSqlParser加强动态拼接SQL/" class="archive-article-date">
-  	<time datetime="2018-02-06T07:53:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>项目里有不少需要导出的数据，渐渐演化成固定报表，使用了<code>GitHub</code>上开源项目  <a href="https://github.com/xianrendzw/EasyReport" target="_blank" rel="noopener">EasyReport</a> 基本能满足日常需要，但比较明显的问题是：<code>条件</code>是靠<code>占位</code>替换变量的方式，虽有<code>默认值</code>，但是附加条件时任不够灵活。</p>
-<p>为了方便使用，就对项目做了部分改造：</p>
-<p><img src="/2018/02/06/使用JSqlParser加强动态拼接SQL/rebuild_after.png" alt="改造后报表参数配置页"></p>
-<ol>
-<li><p>将条件调整为 <code>附加</code>、<code>替换</code>两种</p>
-<ul>
-<li><p><code>附加</code>指找到 主执行SQL的<code>where</code> 部分，如当前参数的值<code>不为空值</code>则附加到<code>where</code> 后</p>
-</li>
-<li><p><code>替换</code>指通过特定的语法格式就行占位，再进行变量替换返回完整的可执行SQL，如为替换代码与原系统功能一致</p>
-</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li>​    利用 <a href="https://github.com/JSQLParser/JSqlParser" target="_blank" rel="noopener">JSQLParser</a> 解析SQL，根据配置附加执行内容,代码参考  <code>com.easytoolsoft.easyreport.domain.report.util.JsqlParserWhereConditionHelper</code></li>
-</ol>
-        
-          <a class="article-more-a" href="/2018/02/06/使用JSqlParser加强动态拼接SQL/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JSqlParser</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SQLReport</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Report//" class="article-tag-list-link color2">Report</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Report/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/06/使用JSqlParser加强动态拼接SQL/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1305,6 +1337,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">kettle</a>
               </li>
              
@@ -1318,14 +1358,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">grant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转义</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1349,11 +1381,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">grant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转义</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">folding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1366,22 +1430,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ulimit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1457,6 +1505,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ionic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
               </li>
              
@@ -1466,10 +1518,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ionic</a>
               </li>
             
             <div class="clearfix"></div>
