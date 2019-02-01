@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="杂记">
 <meta property="og:description" content="JS中获取URL参数So you want to get a parameter from a URL? URL parameters (also called query string parameters or URL variables) can have lots of useful data including product info, user preferences, link r">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-17T11:52:42.313Z">
+<meta property="og:updated_time" content="2019-02-01T05:46:08.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript获取URL参数">
 <meta name="twitter:description" content="JS中获取URL参数So you want to get a parameter from a URL? URL parameters (also called query string parameters or URL variables) can have lots of useful data including product info, user preferences, link r">
@@ -166,9 +166,10 @@
 <h2 id="Getting-a-URL-Parameter"><a href="#Getting-a-URL-Parameter" class="headerlink" title="Getting a URL Parameter"></a>Getting a URL Parameter</h2><p>Let’s say you have the following URL:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/?product=shirt&amp;color=blue&amp;newuser&amp;size=m</span><br></pre></td></tr></table></figure>
 <p>Here’s a function to give you all the URL parameters as a neat object:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllUrlParams</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// get query string from url (optional) or window</span></span><br><span class="line">  <span class="keyword">var</span> queryString = url ? url.split(<span class="string">'?'</span>)[<span class="number">1</span>] : <span class="built_in">window</span>.location.search.slice(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// we'll store the parameters here</span></span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// if query string exists</span></span><br><span class="line">  <span class="keyword">if</span> (queryString) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// stuff after # is not part of query string, so get rid of it</span></span><br><span class="line">    queryString = queryString.split(<span class="string">'#'</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// split our query string into its component parts</span></span><br><span class="line">    <span class="keyword">var</span> arr = queryString.split(<span class="string">'&amp;'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">      <span class="comment">// separate the keys and the values</span></span><br><span class="line">      <span class="keyword">var</span> a = arr[i].split(<span class="string">'='</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// set parameter name and value (use 'true' if empty)</span></span><br><span class="line">      <span class="keyword">var</span> paramName = a[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">var</span> paramValue = <span class="keyword">typeof</span> (a[<span class="number">1</span>]) === <span class="string">'undefined'</span> ? <span class="literal">true</span> : a[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// (optional) keep case consistent</span></span><br><span class="line">      paramName = paramName.toLowerCase();</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> paramValue === <span class="string">'string'</span>) paramValue = paramValue.toLowerCase();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// if the paramName ends with square brackets, e.g. colors[] or colors[2]</span></span><br><span class="line">      <span class="keyword">if</span> (paramName.match(<span class="regexp">/\[(\d+)?\]$/</span>)) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// create key if it doesn't exist</span></span><br><span class="line">        <span class="keyword">var</span> key = paramName.replace(<span class="regexp">/\[(\d+)?\]/</span>, <span class="string">''</span>);</span><br><span class="line">        <span class="keyword">if</span> (!obj[key]) obj[key] = [];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if it's an indexed array e.g. colors[2]</span></span><br><span class="line">        <span class="keyword">if</span> (paramName.match(<span class="regexp">/\[\d+\]$/</span>)) &#123;</span><br><span class="line">          <span class="comment">// get the index value and add the entry at the appropriate position</span></span><br><span class="line">          <span class="keyword">var</span> index = <span class="regexp">/\[(\d+)\]/</span>.exec(paramName)[<span class="number">1</span>];</span><br><span class="line">          obj[key][index] = paramValue;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// otherwise add the value to the end of the array</span></span><br><span class="line">          obj[key].push(paramValue);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// we're dealing with a string</span></span><br><span class="line">        <span class="keyword">if</span> (!obj[paramName]) &#123;</span><br><span class="line">          <span class="comment">// if it doesn't exist, create property</span></span><br><span class="line">          obj[paramName] = paramValue;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj[paramName] &amp;&amp; <span class="keyword">typeof</span> obj[paramName] === <span class="string">'string'</span>)&#123;</span><br><span class="line">          <span class="comment">// if property does exist and it's a string, convert it to an array</span></span><br><span class="line">          obj[paramName] = [obj[paramName]];</span><br><span class="line">          obj[paramName].push(paramValue);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// otherwise add the property</span></span><br><span class="line">          obj[paramName].push(paramValue);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllUrlParams</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// get query string from url (optional) or window</span></span><br><span class="line">  <span class="keyword">var</span> queryString = url ? url.split(<span class="string">'?'</span>)[<span class="number">1</span>] : <span class="built_in">window</span>.location.search.slice(<span class="number">1</span>);</span><br><span class="line">  <span class="comment">// we'll store the parameters here</span></span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="comment">// if query string exists</span></span><br><span class="line">  <span class="keyword">if</span> (queryString) &#123;</span><br><span class="line">    <span class="comment">// stuff after # is not part of query string, so get rid of it</span></span><br><span class="line">    queryString = queryString.split(<span class="string">'#'</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// split our query string into its component parts</span></span><br><span class="line">    <span class="keyword">var</span> arr = queryString.split(<span class="string">'&amp;'</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">      <span class="comment">// separate the keys and the values</span></span><br><span class="line">      <span class="keyword">var</span> a = arr[i].split(<span class="string">'='</span>);</span><br><span class="line">      <span class="comment">// set parameter name and value (use 'true' if empty)</span></span><br><span class="line">      <span class="keyword">var</span> paramName = a[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">var</span> paramValue = <span class="keyword">typeof</span> (a[<span class="number">1</span>]) === <span class="string">'undefined'</span> ? <span class="literal">true</span> : a[<span class="number">1</span>];</span><br><span class="line">      <span class="comment">// (optional) keep case consistent</span></span><br><span class="line">      paramName = paramName.toLowerCase();</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> paramValue === <span class="string">'string'</span>) paramValue = paramValue.toLowerCase();</span><br><span class="line">      <span class="comment">// if the paramName ends with square brackets, e.g. colors[] or colors[2]</span></span><br><span class="line">      <span class="keyword">if</span> (paramName.match(<span class="regexp">/\[(\d+)?\]$/</span>)) &#123;</span><br><span class="line">        <span class="comment">// create key if it doesn't exist</span></span><br><span class="line">        <span class="keyword">var</span> key = paramName.replace(<span class="regexp">/\[(\d+)?\]/</span>, <span class="string">''</span>);</span><br><span class="line">        <span class="keyword">if</span> (!obj[key]) obj[key] = [];</span><br><span class="line">        <span class="comment">// if it's an indexed array e.g. colors[2]</span></span><br><span class="line">        <span class="keyword">if</span> (paramName.match(<span class="regexp">/\[\d+\]$/</span>)) &#123;</span><br><span class="line">          <span class="comment">// get the index value and add the entry at the appropriate position</span></span><br><span class="line">          <span class="keyword">var</span> index = <span class="regexp">/\[(\d+)\]/</span>.exec(paramName)[<span class="number">1</span>];</span><br><span class="line">          obj[key][index] = paramValue;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// otherwise add the value to the end of the array</span></span><br><span class="line">          obj[key].push(paramValue);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// we're dealing with a string</span></span><br><span class="line">        <span class="keyword">if</span> (!obj[paramName]) &#123;</span><br><span class="line">          <span class="comment">// if it doesn't exist, create property</span></span><br><span class="line">          obj[paramName] = paramValue;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj[paramName] &amp;&amp; <span class="keyword">typeof</span> obj[paramName] === <span class="string">'string'</span>)&#123;</span><br><span class="line">          <span class="comment">// if property does exist and it's a string, convert it to an array</span></span><br><span class="line">          obj[paramName] = [obj[paramName]];</span><br><span class="line">          obj[paramName].push(paramValue);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// otherwise add the property</span></span><br><span class="line">          obj[paramName].push(paramValue);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>You’ll see how this works soon, but first, here are some usage examples:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getAllUrlParams().product; <span class="comment">// 'shirt'</span></span><br><span class="line">getAllUrlParams().color; <span class="comment">// 'blue'</span></span><br><span class="line">getAllUrlParams().newuser; <span class="comment">// true</span></span><br><span class="line">getAllUrlParams().nonexistent; <span class="comment">// undefined</span></span><br><span class="line">getAllUrlParams(<span class="string">'http://test.com/?a=abc'</span>).a; <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="Things-to-Know-Before-Using-This-Function"><a href="#Things-to-Know-Before-Using-This-Function" class="headerlink" title="Things to Know Before Using This Function"></a>Things to Know Before Using This Function</h2><ul>
 <li>Our function assumes the parameters are separated by the <code>&amp;</code> character, as indicated in the <a href="https://www.w3.org/TR/REC-html40/interact/forms.html#form-content-type" target="_blank" rel="noopener">W3C specifications</a>. However, the URL parameter format in general is <a href="https://url.spec.whatwg.org/#application/x-www-form-urlencoded" target="_blank" rel="noopener">not clearly defined</a>, so you occasionally might see <code>;</code> or <code>&amp;amp;</code> as <a href="https://www.w3.org/TR/1999/REC-html401-19991224/appendix/notes.html#h-B.2.2" target="_blank" rel="noopener">separators</a>.</li>
 <li>Our function still works if a parameter doesn’t have an equals sign or if it has an equals sign but no value.</li>
@@ -250,7 +251,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The code in this article works for the most common use cases where you would get a URL query parameter. If you’re working with any edge cases, such as uncommon separators or special formatting, then be sure to test and adjust accordingly.</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>The code in this article works for the most common use cases where you would get a URL query parameter. If you’re working with any edge cases, such as uncommon separators or special formatting, then be sure to test and adjust accordingly.</p>
 <p>If you want to do more with URLs, there are specific libraries available, such as <a href="https://plugins.jquery.com/url/" target="_blank" rel="noopener">jQuery URL plugin</a> and <a href="http://medialize.github.io/URI.js/" target="_blank" rel="noopener">Medialize URI.js</a>. Since it’s basically string manipulation, it often makes sense just to use plain JavaScript. Whether you use your own code or go with a library, be sure to check everything and make sure it works for your use cases.</p>
 <blockquote>
 <p>原文地址</p>
@@ -499,14 +500,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -516,6 +509,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">url</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,15 +544,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">maven</a>
+                <a href="javascript:void(0)" class="js-tag color1">grant</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jdk</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">version</a>
+                <a href="javascript:void(0)" class="js-tag color3">转义</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,11 +568,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">grant</a>
+                <a href="javascript:void(0)" class="js-tag color1">maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转义</a>
+                <a href="javascript:void(0)" class="js-tag color4">jdk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">version</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,6 +608,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源</a>
               </li>
              
@@ -616,10 +621,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,26 +656,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">docker-compose</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kong</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">aliyun</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
@@ -687,6 +668,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">docker-compose</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kong</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">ionic</a>
               </li>
              
@@ -696,6 +689,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">aliyun</a>
               </li>
              
               <li class="article-tag-list-item">
