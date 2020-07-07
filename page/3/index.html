@@ -141,6 +141,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-VirtualBox虚拟机Ubuntu添加磁盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/">VirtualBox虚拟机Ubuntu添加磁盘</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/" class="archive-article-date">
+  	<time datetime="2018-01-16T10:40:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>公司有一台跑在<code>VirtualBox</code>上的SVN服务器，时间有点久远用的还部署<code>lvm</code>，最近发现磁盘满了得，加啊！</p>
+<h4 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h4><p>添加虚拟磁盘：</p>
+<p><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/adddisk.png" alt="添加磁盘"></p>
+<h4 id="创建磁盘"><a href="#创建磁盘" class="headerlink" title="创建磁盘"></a>创建磁盘</h4><p>首先 <code>sudo fdisk -l</code>  查看磁盘，获取到磁盘信息</p>
+<p><img src="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/fdisk.png" alt="fdisk"></p>
+<p>开始分区 <code>sudo fdisk /dev/sdb</code> </p>
+        
+          <a class="article-more-a" href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">磁盘扩充</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ubuntu//" class="article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ubuntu/磁盘//" class="article-tag-list-link color3">磁盘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/16/VirtualBox虚拟机Ubuntu添加磁盘/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux上控制Tomcat定时启动关闭" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -986,123 +1087,9 @@
 
 
   
-    <article id="post-使用SSH端口转发访问内网" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/12/06/使用SSH端口转发访问内网/">使用SSH端口转发访问内网</a>
-    </h1>
-  
-
-        
-        <a href="/2013/12/06/使用SSH端口转发访问内网/" class="archive-article-date">
-  	<time datetime="2013-12-05T16:03:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2013-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h3 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h3><p>有一台拥有公网IP的服务器，提供SSH服务，端口22,可远程连接；该服务器拥有多网卡，配有内网IP； 从数据安全角度内网的Oracle不提供公网服务，但SSH服务器所在内网端可以访问数据库服务器；</p>
-<p>现在需要访问数据库服务器，进行数据操作，首先想到的方法：在SSH服务器上安装Oracle客户端，使用SQL*PLUS访问数据库；或者使用一些第三方数据库管理客户端；</p>
-<p>无论是使用Oracle客户端还是第三方数据库管理端，都涉及到软件的安装、配置，这都有可能对现有机器环境造成影响，而且还不一定有在SSH服务器上安装软件的权限，怎么办？</p>
-<h3 id="SSH端口转发"><a href="#SSH端口转发" class="headerlink" title="SSH端口转发"></a>SSH端口转发</h3><p>SSH提供了端口转发功能，就以SecureCRT配置为例：</p>
-<p>1 先用SecureCRT 建立一个会话，选择“选项” 中的 “会话选项”-&gt; “连接”-&gt;“端口转发”</p>
-<p> 选择 【添加 】：</p>
-<p> 【名称】oa_1521 (名称最好清晰)</p>
-<p> 【手工选择允许访问的本地 IP地址】 使用默认，可不指定 127.0.0.1</p>
-<p> 【端口】11521 （找一个本机并未使用的端口）</p>
-<p> 【远程】 -&gt;【目的主机不同于SSH服务】填数据库的IP 地址</p>
-<p> 【端口】 填Oracle的监听端口 如1521</p>
-<p><img src="/2013/12/06/使用SSH端口转发访问内网/端口转发配置.jpg" alt="配置图"></p>
-<p>2 现在就可以用SecureCRT 连接刚才新建的会话了,连接上SSH</p>
-<p>3 修改本机的ORACLE TNSNAMES.ORA,添加配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TNS_NAME =</span><br><span class="line">  (DESCRIPTION =</span><br><span class="line">    (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 11521)) )</span><br><span class="line">    (CONNECT_DATA =</span><br><span class="line">      (SERVER = DEDICATED)</span><br><span class="line">      (SERVICE_NAME = orcl)</span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-<p>其中SERVICE_NAME 为数据库服务监听的真实SERVER_NAME</p>
-<p>打开PL/SQL进行登录测试，成功！</p>
-<p>整个流程：</p>
-<p> PL/SQL—&gt;127.0.0.1:11521—ssh –&gt;SSH服务器—转发—&gt;数据库服务器:1521</p>
-<p><strong>同理，相同的办法也就是整个内网的服务都可以访问了</strong></p>
-<p><strong>注</strong>：当前使用SecureCRT版本V6.2.3，不同版本可能会存在不同的配置选项名称</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssh</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">端口转发</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">穿透</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ssh//" class="article-tag-list-link color4">ssh</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2013/12/06/使用SSH端口转发访问内网/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1189,14 +1176,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">kettle</a>
               </li>
              
@@ -1209,27 +1188,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cron</a>
+                <a href="javascript:void(0)" class="js-tag color4">adb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">关闭</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1253,7 +1220,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">关闭</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1262,10 +1257,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1285,18 +1276,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">10K</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件句柄</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ulimit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">maven</a>
               </li>
              
@@ -1313,6 +1292,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">10K</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件句柄</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ulimit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">postman</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源</a>
               </li>
              
@@ -1322,6 +1317,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">webservice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">carte</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1337,26 +1348,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">postman</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编码转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">中文金额</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
@@ -1369,11 +1360,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">webservice</a>
+                <a href="javascript:void(0)" class="js-tag color5">编码转换</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">carte</a>
+                <a href="javascript:void(0)" class="js-tag color5">中文金额</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1401,14 +1392,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
@@ -1421,7 +1404,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
               </li>
              
               <li class="article-tag-list-item">

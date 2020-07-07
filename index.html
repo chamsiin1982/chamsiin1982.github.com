@@ -141,6 +141,131 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ADB常用命令备忘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/18/ADB常用命令备忘/">ADB常用命令备忘</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/18/ADB常用命令备忘/" class="archive-article-date">
+  	<time datetime="2020-01-18T13:44:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>adb 就是 <code>Android Debug Bridge</code> 的缩写，adb 能够完成“各种助手”工具的绝大部分操作，主要由 3 部分组成:</p>
+<ul>
+<li>adb client：通过命令对Android设备进行各种操作</li>
+<li>adb server：对接入设备、连接等进行管理，负责执行命令的转发</li>
+<li>adb daemon：adb后台进程服务，负责adb命令的执行和结果返回</li>
+</ul>
+<p><img src="/2020/01/18/ADB常用命令备忘/9948248-3e35a36a87ddfec9.png" alt="ADB交互" style="zoom:38%;"></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>adb devices  获取设备列表和设备状态</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\chamsiin&gt;adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">5fd2fe6b        device</span><br></pre></td></tr></table></figure>
+<ul>
+<li>adb get-state  获取设备状态</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\chamsiin&gt;adb get-state</span><br><span class="line">device</span><br><span class="line"></span><br><span class="line">##设备有三种状态：device , offline , unknown</span><br><span class="line">## device 设备正常</span><br><span class="line">## offline 连接异常，未响应</span><br><span class="line">## unknown 没有设备</span><br></pre></td></tr></table></figure>
+<ul>
+<li>adb kill-server 终止adb服务</li>
+<li>adb start-server 启动adb服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在连接异常时，通过 kill-server 和 start-server 来重起adb</span><br></pre></td></tr></table></figure>
+<ul>
+<li>adb install /path/xxx.apk  安装应用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">覆盖安装 使用 adb install -r /path/xxx.apk</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>adb uninstall package_name 卸载应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：是需卸载应用的包名，不是安装包路径</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>adb push  将本地文件复制到Android设备</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb push local_file_path to_android_sdcard_path</span><br><span class="line">##写入文件路径，一般放在sdcard中，否则可能会写入权限问题</span><br></pre></td></tr></table></figure>
+<ul>
+<li>adb pull  将Android设备文件下载到本地</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb push  from_android_sdcard_path local_file_path</span><br><span class="line">##写入文件路径，一样需要注意权限问题</span><br></pre></td></tr></table></figure>
+<ul>
+<li>adb reboot 重启</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##更多命令可通过查询帮助获得</span><br><span class="line">adb --help</span><br></pre></td></tr></table></figure>
+<p>关于 <code>adb shell</code> 得再花一篇来专门整理</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">adb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/18/ADB常用命令备忘/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-中文大写金额转换为数字金额" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1124,132 +1249,9 @@
 
 
   
-    <article id="post-使用docker-compose安装Kong及相关环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/11/使用docker-compose安装Kong及相关环境/">使用docker-compose安装Kong及相关环境</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/11/使用docker-compose安装Kong及相关环境/" class="archive-article-date">
-  	<time datetime="2018-11-11T14:02:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>最近一段时间在使用Kong作为API网关，为了方便搭建环境，参考官网以及一些分享，整理一份使用docker-compose安装环境的文档</p>
-<blockquote>
-<p><strong>使用版本说明：</strong></p>
-<p>Kong :  0.14.1</p>
-<p>DB ：postgres:9.6</p>
-<p>Kong-Dashboard  : v3.5.0 </p>
-<p>环境 ： Docker for Windows docker-compose默认已安装，其他需安装环境请查看官方文档</p>
-</blockquote>
-<h3 id="准备环境网络"><a href="#准备环境网络" class="headerlink" title="准备环境网络"></a>准备环境网络</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create kong-net</span><br></pre></td></tr></table></figure>
-<h3 id="准备数据存储卷"><a href="#准备数据存储卷" class="headerlink" title="准备数据存储卷"></a>准备数据存储卷</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create pgdata</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明</strong>：数据卷使用主机挂载还是创建独立volume，可以按需要进行调整</p>
-</blockquote>
-<h3 id="创建docker-compose-yml"><a href="#创建docker-compose-yml" class="headerlink" title="创建docker-compose.yml"></a>创建docker-compose.yml</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'2'</span></span><br><span class="line">services:</span><br><span class="line">  kong-database:</span><br><span class="line">    image: postgres:<span class="number">9.6</span></span><br><span class="line">    container_name: kong-database</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_USER=kong</span><br><span class="line">      - POSTGRES_DB=kong</span><br><span class="line">      - POSTGRES_PASSWORD=kong</span><br><span class="line">    volumes:</span><br><span class="line">      - pgdata:/var/lib/postgresql/data</span><br><span class="line">    networks: </span><br><span class="line">      - kong-net</span><br><span class="line"></span><br><span class="line">  kong:</span><br><span class="line">    image: kong:latest </span><br><span class="line">    container_name: kong</span><br><span class="line">    restart: always</span><br><span class="line">    links:</span><br><span class="line">      - kong-database:kong-database</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">8000</span>:<span class="number">8000</span></span><br><span class="line">      - <span class="number">8443</span>:<span class="number">8443</span></span><br><span class="line">      - <span class="number">8001</span>:<span class="number">8001</span></span><br><span class="line">      - <span class="number">8444</span>:<span class="number">8444</span></span><br><span class="line">    environment:</span><br><span class="line">      - KONG_DATABASE=postgres</span><br><span class="line">      - KONG_PG_HOST=kong-database</span><br><span class="line">      - KONG_PG_USER=kong</span><br><span class="line">      - KONG_PG_DATABASE=kong</span><br><span class="line">      - KONG_PG_PASSWORD=kong</span><br><span class="line">      - KONG_ADMIN_LISTEN=<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8001</span>, <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8444</span> ssl</span><br><span class="line">    networks: </span><br><span class="line">      - kong-net</span><br><span class="line"></span><br><span class="line">  kong-dashboard:</span><br><span class="line">    image: pgbi/kong-dashboard</span><br><span class="line">    container_name: kong-dashboard</span><br><span class="line">    links:</span><br><span class="line">      - kong:kong</span><br><span class="line">    command: start --kong-url http://kong:<span class="number">8001</span> --basic-auth admin=admin</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">8081</span>:<span class="number">8080</span></span><br><span class="line">    networks: </span><br><span class="line">      - kong-net</span><br><span class="line"></span><br><span class="line">volumes:</span><br><span class="line">  pgdata:</span><br><span class="line">    external: true</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">   kong-net:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意</strong>：容器间的依赖，存储、网络的使用</p>
-</blockquote>
-<h3 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="keyword">run</span> kong kong migrations up</span><br></pre></td></tr></table></figure>
-<h3 id="通过docker-compose运行环境"><a href="#通过docker-compose运行环境" class="headerlink" title="通过docker-compose运行环境"></a>通过docker-compose运行环境</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d --no-recreate</span><br></pre></td></tr></table></figure>
-<h3 id="访问Kong-Dashboard"><a href="#访问Kong-Dashboard" class="headerlink" title="访问Kong-Dashboard"></a>访问Kong-Dashboard</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http://localhost:8081/</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> <strong>参考资料</strong></p>
-<p> 官网 Docker Install：  <a href="https://docs.konghq.com/install/docker" target="_blank" rel="noopener">https://docs.konghq.com/install/docker</a></p>
-<p> [云框架]KONG API Gateway-用户指南 ：  <a href="https://github.com/cloudframeworks-apigateway/user-guide-apigateway" target="_blank" rel="noopener">https://github.com/cloudframeworks-apigateway/user-guide-apigateway</a></p>
-<p> Docker-compose 中文文档： <a href="https://deepzz.com/post/docker-compose-file.html" target="_blank" rel="noopener">https://deepzz.com/post/docker-compose-file.html</a></p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kong</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">docker-compose</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/docker//" class="article-tag-list-link color2">docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/docker/kong//" class="article-tag-list-link color5">kong</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/11/使用docker-compose安装Kong及相关环境/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1336,14 +1338,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">kettle</a>
               </li>
              
@@ -1356,27 +1350,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cron</a>
+                <a href="javascript:void(0)" class="js-tag color4">adb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">关闭</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color2">gitlab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1400,7 +1382,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">关闭</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1409,10 +1419,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘扩充</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1432,18 +1438,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">10K</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件句柄</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ulimit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">maven</a>
               </li>
              
@@ -1460,6 +1454,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">10K</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件句柄</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ulimit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">postman</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源</a>
               </li>
              
@@ -1469,6 +1479,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">sources.list</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">webservice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">carte</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1484,26 +1510,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">postman</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编码转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">中文金额</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
@@ -1516,11 +1522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">webservice</a>
+                <a href="javascript:void(0)" class="js-tag color5">编码转换</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">carte</a>
+                <a href="javascript:void(0)" class="js-tag color5">中文金额</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1548,14 +1554,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
@@ -1568,7 +1566,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">windows-shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
               </li>
              
               <li class="article-tag-list-item">
