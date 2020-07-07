@@ -141,6 +141,330 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nginx配置url重写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/03/nginx配置url重写/">【转】nginx配置url重写</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/03/nginx配置url重写/" class="archive-article-date">
+  	<time datetime="2018-09-03T05:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>原文地址：<a href="https://xuexb.com/post/nginx-url-rewrite.html" target="_blank" rel="noopener">https://xuexb.com/post/nginx-url-rewrite.html</a></p>
+</blockquote>
+<ul>
+<li>rewrite<ul>
+<li>语法</li>
+<li>简单例子<ul>
+<li>last和break的区别</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>if判断<ul>
+<li>语法</li>
+<li>内置的全局变量</li>
+<li>例子</li>
+</ul>
+</li>
+<li>location<ul>
+<li>语法</li>
+<li>优先级</li>
+<li>例子 - 假地址掩饰真地址</li>
+<li>link</li>
+</ul>
+</li>
+</ul>
+<p>url重写是指通过配置conf文件，以让网站的url中达到某种状态时则定向/跳转到某个规则，比如常见的伪静态、301重定向、浏览器定向等</p>
+<h2 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite"></a>rewrite</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>在配置文件的<code>server</code>块中写，如：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;    <span class="attribute">rewrite</span> 规则 定向路径 重写类型; &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>规则：可以是字符串或者正则来表示想匹配的目标url</li>
+<li>定向路径：表示匹配到规则后要定向的路径，如果规则里有正则，则可以使用<code>$index</code>来表示正则里的捕获分组</li>
+<li>重写类型：<ul>
+<li>last ：相当于Apache里德(L)标记，表示完成rewrite，浏览器地址栏URL地址不变</li>
+<li>break；本条规则匹配完成后，终止匹配，不再匹配后面的规则，浏览器地址栏URL地址不变</li>
+<li>redirect：返回302临时重定向，浏览器地址会显示跳转后的URL地址</li>
+<li>permanent：返回301永久重定向，浏览器地址栏会显示跳转后的URL地址</li>
+</ul>
+</li>
+</ul>
+<h3 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;    </span><br><span class="line">    <span class="comment"># 访问 /last.html 的时候，页面内容重写到 /index.html 中    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /last.html /index.html <span class="literal">last</span>;    </span><br><span class="line">    <span class="comment"># 访问 /break.html 的时候，页面内容重写到 /index.html 中，并停止后续的匹配    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /break.html /index.html <span class="literal">break</span>;    </span><br><span class="line">    <span class="comment"># 访问 /redirect.html 的时候，页面直接302定向到 /index.html中    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /redirect.html /index.html <span class="literal">redirect</span>;    </span><br><span class="line">    <span class="comment"># 访问 /permanent.html 的时候，页面直接301定向到 /index.html中    </span></span><br><span class="line">    <span class="attribute">rewrite</span> /permanent.html /index.html <span class="literal">permanent</span>;    </span><br><span class="line">    <span class="comment"># 把 /html/*.html =&gt; /post/*.html ，301定向    </span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/html/(.+?).html$</span> /post/<span class="variable">$1</span>.html <span class="literal">permanent</span>;    </span><br><span class="line">    <span class="comment"># 把 /search/key =&gt; /search.html?keyword=key    </span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/search\/([^\/]+?)(\/|$)</span> /search.html?keyword=<span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/09/03/nginx配置url重写/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">url rewrite</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/nginx//" class="article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/03/nginx配置url重写/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多了一种在windows10上使用Linux的办法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/25/多了一种在windows10上使用Linux的办法/">多了一种在windows10上使用Linux的办法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/25/多了一种在windows10上使用Linux的办法/" class="archive-article-date">
+  	<time datetime="2018-04-25T15:10:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>这些年一直使用Windows+VirtualBox的方式，通过虚拟机来提供Linux环境，虽然逐渐使用DockerToolbox在替换，但是依然觉得缺那份丝滑，Windons 10（64）提供了的新运行Linux的方式，姑且就认为是微软的Docker吧，好不好试一下，说不定很丝滑^_^</p>
+<h3 id="启用功能"><a href="#启用功能" class="headerlink" title="启用功能"></a>启用功能</h3><p>控制面板-&gt;程序和功能-&gt;启用或关闭Windons功能-&gt;适用于Linux的Windons子系统,“确定”会提示<strong>重启系统</strong><br><img src="/2018/04/25/多了一种在windows10上使用Linux的办法/config_use.jpg" alt="启用环境"></p>
+        
+          <a class="article-more-a" href="/2018/04/25/多了一种在windows10上使用Linux的办法/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">windows-shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/开发环境//" class="article-tag-list-link color5">开发环境</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/25/多了一种在windows10上使用Linux的办法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ubuntu更换国内镜像源" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/23/ubuntu更换国内镜像源/">ubuntu更换国内镜像源</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/23/ubuntu更换国内镜像源/" class="archive-article-date">
+  	<time datetime="2018-04-23T15:43:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>使用apt-get 更新或安装时速度特别慢，因为系统默认使用的是国外的源，通过更换源可以使更新、安装速度更快</p>
+<h3 id="桌面版更换源"><a href="#桌面版更换源" class="headerlink" title="桌面版更换源"></a>桌面版更换源</h3><ul>
+<li><p>System settings</p>
+<p><img src="/2018/04/23/ubuntu更换国内镜像源/systemsetings.jpg" alt="systemsetings"></p>
+</li>
+<li><p>Software &amp; updates -&gt; Download from -&gt; Other…</p></li></ul>
+        
+          <a class="article-more-a" href="/2018/04/23/ubuntu更换国内镜像源/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">源</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">aptget</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sources.list</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ubuntu//" class="article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/23/ubuntu更换国内镜像源/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-使用Kettle的Carte发布一个数据表读写服务1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -855,256 +1179,6 @@
 
 
   
-    <article id="post-不找网管通过iptables转换内外网地址2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/04/不找网管通过iptables转换内外网地址2/">不找网管通过iptables转换内外网地址</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/04/不找网管通过iptables转换内外网地址2/" class="archive-article-date">
-  	<time datetime="2018-01-04T04:28:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p><img src="/2018/01/04/不找网管通过iptables转换内外网地址2/认证服务器部署示意图.png" alt="服务访问时序示意图"></p>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>这是典型的内网部署通过防火墙映射至公网的应用访问时序，使用单点认证需在<code>应用服务器</code>配置<code>单点服务</code>信息、<code>应用服务</code>信息，因需要公网提供服务，都配置成公网地址，对应认证服务器地址***.94.78.76  端口 <strong>20008</strong>，应用服务器地址 ***.94.78.93 端口<strong>10004</strong></p>
-<ol>
-<li>应用服务器 <strong>内网地址</strong>    192.168.5.109 服务部署 Tomcat 使用端口 8080<br><strong>映射公网</strong>      <em>*</em>.94.78.93  端口  10004</li>
-<li>单点认证服务器 <strong>内网地址</strong>  192.168.5.207 端口 8080<br>映射至公网    ***.94.78.76  端口  20008 </li>
-</ol>
-<h4 id="重定向URL"><a href="#重定向URL" class="headerlink" title="重定向URL"></a>重定向URL</h4><p>通过公网 访问服务：<code>http://***.94.78.93:10004/vocs</code> 会被单点认证服务器拦截，会拼接路径： <code>http:// ***.94.78.93:20008/xxxxx?app=vocs&amp;url=http:// ***.94.78.93:10004/vocs</code><br>（路径只为表现功能，不代表实际路径）</p>
-        
-          <a class="article-more-a" href="/2018/01/04/不找网管通过iptables转换内外网地址2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iptables</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">认证</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ip地址改写</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/04/不找网管通过iptables转换内外网地址2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Integer的默认缓存特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/03/Java-Integer的默认缓存特性/">Java Integer的默认缓存特性</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/03/Java-Integer的默认缓存特性/" class="archive-article-date">
-  	<time datetime="2018-01-03T08:56:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h4 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h4><p>项目里有发现“神奇”的代码，先不考虑代码逻辑以及实现方法是否合理，原来代码实现大致是这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## department 对象</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Department</span></span>&#123;</span><br><span class="line">   <span class="keyword">private</span>  Integer departmentId;</span><br><span class="line">   <span class="keyword">private</span>  String  departmentName;</span><br><span class="line">   <span class="keyword">private</span> Integer  pDepartmentId;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">private</span> List&lt;user&gt; departmentMember;</span><br><span class="line">   ## 省略get\set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## user 对象</span><br><span class="line">publci <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    ##所属部门编号</span><br><span class="line">    <span class="keyword">private</span> Integer departmentId;</span><br><span class="line">    </span><br><span class="line">    ## 省略get/set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/01/03/Java-Integer的默认缓存特性/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/03/Java-Integer的默认缓存特性/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-使用私有协议控制打开浏览器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/03/使用私有协议控制打开浏览器/">使用私有协议控制打开浏览器</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/03/使用私有协议控制打开浏览器/" class="archive-article-date">
-  	<time datetime="2018-01-03T05:37:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>有这样一个项目：通过单点登录集成WEB类应用，通过统一入口方式实现应用的集中访问，效果见图</p>
-<p><img src="/2018/01/03/使用私有协议控制打开浏览器/desktop.png" alt="desktop"></p>
-<p>但因存在多开发厂商、集成项目建设时间差异等原因，出现浏览器差异化需求，如：行文办公，因使用插件需通过ActivitiX进行加载，必须使用IE；新上线的应用，因使用的框架比较新，对低版本IE不兼容，而需要使用Chrome或火狐这样的现代浏览器，林林总总。</p>
-<p>虽说只有考虑不到的设计没有碰不到的需求，客户说要支持，只能上啊，乙放得有乙方的承担（囧）。</p>
-        
-          <a class="article-more-a" href="/2018/01/03/使用私有协议控制打开浏览器/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">web编程,shell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/03/使用私有协议控制打开浏览器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1119,7 +1193,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 何建华
+    		&copy; 2020 何建华
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1206,15 +1280,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">param</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">url</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1226,7 +1292,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">grant</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转义</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1250,14 +1320,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">grant</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转义</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
@@ -1266,11 +1328,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">param</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">url</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">远程桌面</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">folding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vpn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,19 +1376,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">folding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
+                <a href="javascript:void(0)" class="js-tag color3">postman</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1315,6 +1393,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JSqlParser</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLReport</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">url rewrite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1342,23 +1440,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JSqlParser</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLReport</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">webservice</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">carte</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kong</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OAuth2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1382,15 +1480,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kong</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">ionic</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">web编程,shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1403,10 +1501,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">aliyun</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">类型转换</a>
               </li>
             
             <div class="clearfix"></div>
